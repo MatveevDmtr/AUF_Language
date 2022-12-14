@@ -1,0 +1,353 @@
+
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+--------------------Start program--------------------
+File size = 155
+buffer size: 155
+fread number of symbols: 151
+tcode created
+line in readVal: Волк Слабее Лев
+	Я может и не может: Волк Слабее 6
+		Запомните твари: Волк 5
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Волк Слабее Лев
+	Я может и не может: Волк Слабее 6
+		Запомните твари: Волк 5
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+line in readVal: Лев
+	Я может и не может: Волк Слабее 6
+		Запомните твари: Волк 5
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Лев
+	Я может и не может: Волк Слабее 6
+		Запомните твари: Волк 5
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+line in readVal: Волк Слабее 6
+		Запомните твари: Волк 5
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Волк Слабее 6
+		Запомните твари: Волк 5
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+line in readVal: 6
+		Запомните твари: Волк 5
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 1
+
+
+++++++++++Tcode Dump++++++++++
+
+Size     = 9
+Capacity = 10
+
+[0000]:  OPR    IF 
+[0001]:  STR    Волк
+[0002]:  OPR    LESS
+[0003]:  STR    Лев
+[0004]:  NLN    1
+[0005]:  OPR    IF 
+[0006]:  STR    Волк
+[0007]:  OPR    LESS
+[0008]:  VAL    6
+[0009]:  FREE
+
+----------Tcode Dump----------
+
+finish Tcode Recalloc
+
+
+++++++++++Tcode Dump++++++++++
+
+Size     = 9
+Capacity = 20
+
+[0000]:  OPR    IF 
+[0001]:  STR    Волк
+[0002]:  OPR    LESS
+[0003]:  STR    Лев
+[0004]:  NLN    1
+[0005]:  OPR    IF 
+[0006]:  STR    Волк
+[0007]:  OPR    LESS
+[0008]:  VAL    6
+[0009]:  FREE
+[0010]:  FREE
+[0011]:  FREE
+[0012]:  FREE
+[0013]:  FREE
+[0014]:  FREE
+[0015]:  FREE
+[0016]:  FREE
+[0017]:  FREE
+[0018]:  FREE
+[0019]:  FREE
+
+----------Tcode Dump----------
+
+line in readVal: Волк 5
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Волк 5
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+line in readVal: 5
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 1
+line in readVal: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Волк Овца
+Запомните твари: Волк Тигр end.
+line in readVal: Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Овца
+Запомните твари: Волк Тигр end.
+line in readVal: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Волк Тигр end.
+
+
+++++++++++Tcode Dump++++++++++
+
+Size     = 19
+Capacity = 20
+
+[0000]:  OPR    IF 
+[0001]:  STR    Волк
+[0002]:  OPR    LESS
+[0003]:  STR    Лев
+[0004]:  NLN    1
+[0005]:  OPR    IF 
+[0006]:  STR    Волк
+[0007]:  OPR    LESS
+[0008]:  VAL    6
+[0009]:  NLN    2
+[0010]:  OPR    ASS
+[0011]:  STR    Волк
+[0012]:  VAL    5
+[0013]:  NLN    1
+[0014]:  OPR    ASS
+[0015]:  STR    Волк
+[0016]:  STR    Овца
+[0017]:  NLN    0
+[0018]:  OPR    ASS
+[0019]:  FREE
+
+----------Tcode Dump----------
+
+finish Tcode Recalloc
+
+
+++++++++++Tcode Dump++++++++++
+
+Size     = 19
+Capacity = 40
+
+[0000]:  OPR    IF 
+[0001]:  STR    Волк
+[0002]:  OPR    LESS
+[0003]:  STR    Лев
+[0004]:  NLN    1
+[0005]:  OPR    IF 
+[0006]:  STR    Волк
+[0007]:  OPR    LESS
+[0008]:  VAL    6
+[0009]:  NLN    2
+[0010]:  OPR    ASS
+[0011]:  STR    Волк
+[0012]:  VAL    5
+[0013]:  NLN    1
+[0014]:  OPR    ASS
+[0015]:  STR    Волк
+[0016]:  STR    Овца
+[0017]:  NLN    0
+[0018]:  OPR    ASS
+[0019]:  FREE
+[0020]:  FREE
+[0021]:  FREE
+[0022]:  FREE
+[0023]:  FREE
+[0024]:  FREE
+[0025]:  FREE
+[0026]:  FREE
+[0027]:  FREE
+[0028]:  FREE
+[0029]:  FREE
+[0030]:  FREE
+[0031]:  FREE
+[0032]:  FREE
+[0033]:  FREE
+[0034]:  FREE
+[0035]:  FREE
+[0036]:  FREE
+[0037]:  FREE
+[0038]:  FREE
+[0039]:  FREE
+
+----------Tcode Dump----------
+
+line in readVal: Тигр end.
+num read sym: 0
+line in ReadVar: Тигр end.
+
+
+++++++++++Tcode Dump++++++++++
+
+Size     = 21
+Capacity = 40
+
+[0000]:  OPR    IF 
+[0001]:  STR    Волк
+[0002]:  OPR    LESS
+[0003]:  STR    Лев
+[0004]:  NLN    1
+[0005]:  OPR    IF 
+[0006]:  STR    Волк
+[0007]:  OPR    LESS
+[0008]:  VAL    6
+[0009]:  NLN    2
+[0010]:  OPR    ASS
+[0011]:  STR    Волк
+[0012]:  VAL    5
+[0013]:  NLN    1
+[0014]:  OPR    ASS
+[0015]:  STR    Волк
+[0016]:  STR    Овца
+[0017]:  NLN    0
+[0018]:  OPR    ASS
+[0019]:  STR    Волк
+[0020]:  STR    Тигр
+[0021]:  FREE
+[0022]:  FREE
+[0023]:  FREE
+[0024]:  FREE
+[0025]:  FREE
+[0026]:  FREE
+[0027]:  FREE
+[0028]:  FREE
+[0029]:  FREE
+[0030]:  FREE
+[0031]:  FREE
+[0032]:  FREE
+[0033]:  FREE
+[0034]:  FREE
+[0035]:  FREE
+[0036]:  FREE
+[0037]:  FREE
+[0038]:  FREE
+[0039]:  FREE
+
+----------Tcode Dump----------
+
+start making syntax tree
+start CodeBlock
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+start NewLine: ip: 4, tcode->Size: 21
+ip++: 1, curr level: 0
+start CodeBlock
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+start NewLine: ip: 9, tcode->Size: 21
+ip++: 2, curr level: 1
+start CodeBlock
+returning GetAss in GetIf
+start GetAss
+start GetVariable
+got variable in GetAss()
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+content of l_node: Волк
+finish GetAss()
+finish GetTrunkBranch()
+block root: 0000020817f91c30
+before cycle in CodeBlock
+start NewLine: ip: 13, tcode->Size: 21
+ip++: 1, curr level: 2
+level-: 1
+NLN: 1
+block root: 0000020817f91c30
+content of l_node in GetIf: LESS
+finish GetTrunkBranch()
+block root: 0000020817fb3af0
+before cycle in CodeBlock
+start NewLine: ip: 13, tcode->Size: 21
+ip++: 1, curr level: 1
+iteration in CodeBlock
+returning GetAss in GetIf
+start GetAss
+start GetVariable
+got variable in GetAss()
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+content of l_node: Волк
+finish GetAss()
+finish GetTrunkBranch()
+found action: 0000020817f974d0, type: STM
+block tail: 0000020817fb3af0end iteration
+curr_level: 1
+start NewLine: ip: 17, tcode->Size: 21
+ip++: 0, curr level: 1
+level-: 0
+NLN: 0
+block root: 0000020817fb3af0
+content of l_node in GetIf: LESS
+finish GetTrunkBranch()
+block root: 0000020817f973e0
+before cycle in CodeBlock
+start NewLine: ip: 17, tcode->Size: 21
+ip++: 0, curr level: 0
+iteration in CodeBlock
+returning GetAss in GetIf
+start GetAss
+start GetVariable
+got variable in GetAss()
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+content of l_node: Волк
+finish GetAss()
+finish GetTrunkBranch()
+found action: 0000020817f972a0, type: STM
+block tail: 0000020817f973e0end iteration
+curr_level: 0
+level-: -1
+NLN: -253499182
+block root: 0000020817f973e0
+tree pointer in HTMLDump: 00000070517ff690
+picture name: graphCode0.png
+tree pointer: 00000070517ff690
+start making console cmd
+console cmd: dot -T png -o graphCode0.png dump.dot
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+--------------------Finish program--------------------
