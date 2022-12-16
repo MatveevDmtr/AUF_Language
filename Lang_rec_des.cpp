@@ -1,5 +1,4 @@
 //#include <TXLib.h>
-#include <stdio.h>
 #include <string.h>
 
 
@@ -26,19 +25,21 @@ token_code_t* tcode = NULL;
 
 static int curr_level = -1;
 
-int main()
+tree_t* CreateTree()
 {
     printf("start\n");
 
     tcode = Tokenize();
 
-    tree_t tree = StructTreeInit(tree);
+    static tree_t tree = StructTreeInit(tree);
 
     TreeCtor(&tree);
 
     MakeSyntaxTree(&tree);
 
     HTMLDump(&tree, "EXAMPLE");
+
+    return &tree;
 }
 
 int MakeSyntaxTree(tree_t* tree)
@@ -575,7 +576,6 @@ elem_s* GetE()//not remade
     {
         ip++;
 
-        elem_s* r_node = GetT();
         elem_s* l_node = op_node;
 
         if (tcode->Ptr[ip - 1].value.op_v == OP_ADD)
@@ -586,6 +586,8 @@ elem_s* GetE()//not remade
         {
             op_node = NewOp(OP_SUB);
         }
+
+        elem_s* r_node = GetT();
 
         MakeSons(op_node, l_node, r_node);
     }
@@ -606,7 +608,6 @@ elem_s* GetT()
     {
         ip++;
 
-        elem_s* r_node = GetDeg();
         elem_s* l_node = op_node;
 
         if (tcode->Ptr[ip - 1].value.op_v == OP_MUL)
@@ -617,6 +618,8 @@ elem_s* GetT()
         {
             op_node = NewOp(OP_DIV);
         }
+
+        elem_s* r_node = GetDeg();
 
         MakeSons(op_node, l_node, r_node);
     }
@@ -630,22 +633,24 @@ elem_s* GetP()
 
     elem_s* node = NULL;
 
-    if (tcode->Ptr[ip].type == T_BRACE &&
-        tcode->Ptr[ip].value.int_v == BR_OPEN)
+    if (tcode->Ptr[ip].type == T_OP &&
+        tcode->Ptr[ip].value.op_v == BR_OPEN)
     {
+        ip++;
+
         node = GetE();
 
-        if (tcode->Ptr[ip].type == T_BRACE &&
-        tcode->Ptr[ip].value.int_v == BR_OPEN)
+        if (tcode->Ptr[ip].type == T_OP &&
+        tcode->Ptr[ip].value.op_v == BR_CLOSE)
         {
+            ip++;
+
             printf("found closing bracket\n");
         }
         else
         {
             printf("syntax error: closing bracket not found\n");
         }
-
-        ip++;
     }
     else
     {
@@ -710,7 +715,11 @@ int HTMLDump(const tree_t* tree, const char* occasion)
     fclose(html_file);
 }
 
-
+/*int ChangeEncoding(char* text)
+{
+    Encoding utf8 = Encoding.GetEncoding("utf-8");
+    Encoding win1251 = Encoding.GetEncoding("windows-1251");
+}*/
 
 void DrawNode(elem_s* node, FILE* dump_file, const char* branch_label)
 {
@@ -722,6 +731,7 @@ void DrawNode(elem_s* node, FILE* dump_file, const char* branch_label)
     {
         case NODE_OP:
             color = "chartreuse2";
+            if (node->value.op_v == OP_STM)   color = "steelblue1";
             dumpline("%.4s", &node->value.op_v);
             break;
 

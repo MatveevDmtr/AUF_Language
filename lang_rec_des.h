@@ -52,6 +52,7 @@ enum COMMANDS
     OP_LESS   = 'SSEL',
     OP_AND    = 'DNA',
     OP_OR     = 'RO' ,
+    OP_INPUT  = 'PNI',
 };
 
 enum BRACE
@@ -105,6 +106,8 @@ charbuf_t* TextToBuffer(FILE* file);
 size_t GetFileSize(FILE* file);
 
 //finish prototypes
+
+tree_t* CreateTree();
 
 int MakeSyntaxTree(tree_t* tree);
 

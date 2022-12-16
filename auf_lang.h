@@ -1,7 +1,10 @@
-#ifndef DIFFER_H_INCLUDED
-#define DIFFER_H_INCLUDED
+#ifndef AUF_LANG_H_INCLUDED
+#define AUF_LANG_H_INCLUDED
 
+#include <stdio.h>
 #include <stdarg.h>
+
+#include "D:\\Programming\\C\\Ded_course_1_sem\\Processor_v4\\logging.h"
 
 #define StructTreeInit(name)                              \
         StructureTreeInit(#name,                          \
@@ -199,6 +202,8 @@ const size_t MAX_LEN_VAR_NAME   = 30;
 const size_t MIN_LEN_TOKEN_CODE = 10;
 const size_t MAX_LEN_TOKEN_STR  = 30;
 
+const size_t TAB = 4;
+
 typedef int elem_t;
 
 enum ERRCODES
@@ -362,21 +367,21 @@ tree_t StructureTreeInit(const char* name,
 
 int TreeCtor(tree_t* tree);
 
-int MainMenu(tree_t* tree, queue_t* way_down_d, queue_t* way_down_c1, queue_t* way_down_c2);
-
-int Guess(tree_t* tree, elem_s* node);
-
 void SpeakAndPrint(const char* str...);
-
-int GiveDefinition(tree_t* tree, queue_t* way_down);
 
 int ReadNewNode(tree_t* tree, elem_s* node);
 
-void WriteSpaces(int num_spaces, FILE* db);
+int WriteTree(elem_s* root);
 
-int ScanNode(tree_t* tree, elem_s* node, elem_s* parent, FILE* db, size_t num_son);
+int WriteNode(elem_s* node, FILE* treefile, size_t num_spaces);
 
-int ScanDataBase(tree_t* tree);
+void WriteSpaces(int num_spaces, FILE* treefile);
+
+int WriteOp(FILE* treefile, size_t op);
+
+int WriteVar(FILE* treefile, char* var);
+
+int WriteVal(FILE* treefile, int val);
 
 char ReadPrefix(FILE* db);
 
@@ -385,8 +390,6 @@ int InsertNode(tree_t* tree, elem_s* parent, char* ins_elem, size_t num_son);
 int ConfigNode(elem_s** son_field, elem_s* parent, char* ins_elem);
 
 int PrintQuality(queue_t* way_down, size_t i);
-
-int WriteDataBase(elem_s* root);
 
 int PrintDif(const char* name, queue_t* way_down, size_t i_dif);
 

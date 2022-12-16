@@ -3,7 +3,6 @@
 
 
 #include "lang_rec_des.h"
-#include "D:\\Programming\\C\\Ded_course_1_sem\\Processor_v4\\logging.h"
 
 //start DSL
 #define NewStr(line)                                                        \
@@ -37,31 +36,43 @@ const char* FILECODE = "AUF.txt";
 
 //start language commands
 
-const cmd_t CMD_ASSIGN  = {.Text = "Запомните твари:",
+const cmd_t CMD_ASSIGN   = {.Text = "Запомните твари:",
                            .Len  = 16};
-const cmd_t CMD_IF      = {.Text = "Я может и не может:",
+const cmd_t CMD_IF       = {.Text = "Я может и не может:",
                            .Len  = 19};
-const cmd_t CMD_ELSEIF  = {.Text = "А может я:",
+const cmd_t CMD_ELSEIF   = {.Text = "А может я:",
                            .Len  = 10};
-const cmd_t CMD_ELSE    = {.Text = "Но хотя бы не я:",
+const cmd_t CMD_ELSE     = {.Text = "Но хотя бы не я:",
                            .Len  = 16};
-const cmd_t CMD_WHILE   = {.Text = "Безумно можно быть первым:",
+const cmd_t CMD_WHILE    = {.Text = "Безумно можно быть первым:",
                            .Len  = 26};
-const cmd_t CMD_NEWFUNC = {.Text = "Обид не держу - держу пиво.",
+const cmd_t CMD_NEWVAR   = {.Text = "Лучше иметь друга, чем друг друга:",
+                           .Len  = 34};
+const cmd_t CMD_NEWFUNC  = {.Text = "Обид не держу - держу пиво.",
                            .Len  = 27};
-const cmd_t CMD_RETURN  = {.Text = "Сделал дело - дело сделано.",
+const cmd_t CMD_INPUT    = {.Text = "Дед - это как волк, только не волк.",
+                           .Len  = 35};
+const cmd_t CMD_RETURN   = {.Text = "Сделал дело - дело сделано.",
                            .Len  = 27};
-const cmd_t CMD_OPENBR  = {.Text = "АУФ[",
+const cmd_t CMD_OPENBR   = {.Text = "АУФ[",
                            .Len  = 4};
-const cmd_t CMD_CLOSEBR = {.Text = "]АУФ",
-                           .Len  = 4};
-const cmd_t CMD_BIGGER  = {.Text = "Сильнее",
+const cmd_t CMD_CLOSEBR  = {.Text = "]АУФ",
+                            .Len  = 4};
+const cmd_t CMD_OPENBRS  = {.Text = "(",
+                            .Len  = 1};
+const cmd_t CMD_CLOSEBRS = {.Text = ")",
+                            .Len  = 1};
+const cmd_t CMD_BIGGER   = {.Text = "сильнее",
                            .Len  = 7};
-const cmd_t CMD_LESS    = {.Text = "Слабее",
+const cmd_t CMD_LESS     = {.Text = "слабее",
                            .Len  = 6};
-const cmd_t CMD_AND     = {.Text = "важно",
+const cmd_t CMD_NBIGGER  = {.Text = "несильнее",
+                           .Len  = 9};
+const cmd_t CMD_NLESS    = {.Text = "неслабее",
+                           .Len  = 8};
+const cmd_t CMD_AND      = {.Text = "важно",
                            .Len  = 5};
-const cmd_t CMD_OR      = {.Text = "неважно",
+const cmd_t CMD_OR       = {.Text = "неважно",
                            .Len  = 7};
 
 //Arithmetic
@@ -163,31 +174,34 @@ token_code_t* LexTrans(const char* line)
 
     while (*line != '\0')
     {
-        if (!ReadOp(&line, &CMD_ASSIGN,  OP_ASS))    continue;
-        if (!ReadOp(&line, &CMD_IF,      OP_IF ))    continue;
-        if (!ReadOp(&line, &CMD_ELSEIF,  OP_ELIF))   continue;
-        if (!ReadOp(&line, &CMD_ELSE,    OP_ELSE))   continue;
-        if (!ReadOp(&line, &CMD_WHILE,   OP_WHILE))  continue;
-        if (!ReadOp(&line, &CMD_NEWFUNC, OP_NEWF))   continue;
-        if (!ReadOp(&line, &CMD_RETURN,  OP_RET))    continue;
+        if (!ReadOp(&line, &CMD_ASSIGN,   OP_ASS))    continue;
+        if (!ReadOp(&line, &CMD_IF,       OP_IF ))    continue;
+        if (!ReadOp(&line, &CMD_ELSEIF,   OP_ELIF))   continue;
+        if (!ReadOp(&line, &CMD_ELSE,     OP_ELSE))   continue;
+        if (!ReadOp(&line, &CMD_WHILE,    OP_WHILE))  continue;
+        if (!ReadOp(&line, &CMD_NEWFUNC,  OP_NEWF))   continue;
+        if (!ReadOp(&line, &CMD_INPUT,    OP_INPUT))  continue;
+        if (!ReadOp(&line, &CMD_RETURN,   OP_RET))    continue;
 
-        if (!ReadOp(&line, &CMD_OPENBR,  BR_OPEN))   continue;
-        if (!ReadOp(&line, &CMD_CLOSEBR, BR_CLOSE))  continue;
+        if (!ReadOp(&line, &CMD_OPENBR,   BR_OPEN))   continue;
+        if (!ReadOp(&line, &CMD_CLOSEBR,  BR_CLOSE))  continue;
+        if (!ReadOp(&line, &CMD_OPENBRS,  BR_OPEN))   continue;
+        if (!ReadOp(&line, &CMD_CLOSEBRS, BR_CLOSE))  continue;
 
-        if (!ReadOp(&line, &CMD_BIGGER,  OP_BIGGER)) continue;
-        if (!ReadOp(&line, &CMD_LESS,    OP_LESS))   continue;
+        if (!ReadOp(&line, &CMD_BIGGER,   OP_BIGGER)) continue;
+        if (!ReadOp(&line, &CMD_LESS,     OP_LESS))   continue;
 
-        if (!ReadOp(&line, &CMD_AND,     OP_AND))    continue;
-        if (!ReadOp(&line, &CMD_OR,      OP_OR))     continue;
+        if (!ReadOp(&line, &CMD_AND,      OP_AND))    continue;
+        if (!ReadOp(&line, &CMD_OR,       OP_OR))     continue;
 
-        if (!ReadOp(&line, &CMD_ADD,     OP_ADD))    continue;
-        if (!ReadOp(&line, &CMD_SUB,     OP_SUB))    continue;
-        if (!ReadOp(&line, &CMD_MUL,     OP_MUL))    continue;
-        if (!ReadOp(&line, &CMD_DIV,     OP_DIV))    continue;
-        if (!ReadOp(&line, &CMD_DEG,     OP_DEG))    continue;
+        if (!ReadOp(&line, &CMD_ADD,      OP_ADD))    continue;
+        if (!ReadOp(&line, &CMD_SUB,      OP_SUB))    continue;
+        if (!ReadOp(&line, &CMD_MUL,      OP_MUL))    continue;
+        if (!ReadOp(&line, &CMD_DIV,      OP_DIV))    continue;
+        if (!ReadOp(&line, &CMD_DEG,      OP_DEG))    continue;
 
-        if (!ReadVal(&line))                         continue;
-        if (!ReadVar(&line))                         continue;
+        if (!ReadVal(&line))                          continue;
+        if (!ReadVar(&line))                          continue;
 
         printf("Nothing can be read. Exit\n");
 
