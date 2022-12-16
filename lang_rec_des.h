@@ -43,10 +43,10 @@ enum COMMANDS
     OP_STM    = 'MTS',
     OP_ASS    = 'SSA',
     OP_IF     = ' FI',
-    OP_EIF    = 'FILE',
-    OP_ELS    = 'ESLE',
-    OP_WHI    = 'LIHW',
-    OP_NFU    = 'FWEN',
+    OP_ELIF   = 'FILE',
+    OP_ELSE   = 'ESLE',
+    OP_WHILE  = 'LIHW',
+    OP_NEWF   = 'FWEN',
     OP_RET    = 'TER',
     OP_BIGGER = 'GIB',
     OP_LESS   = 'SSEL',
@@ -90,6 +90,8 @@ int ReadVar(const char** ptr_line);
 
 int ReadVal(const char** ptr_line);
 
+int ReadBraces(const char** ptr_line);
+
 int ReadOp(const char** ptr_line, const cmd_t* cmd_text, size_t cmd_code);
 
 int SkipSpaces(const char** ptr_line);
@@ -112,7 +114,11 @@ elem_s* GetCodeBlock();
 
 int GetG(tree_t* tree, const char* str);
 
+elem_s* GetWhile();
+
 elem_s* GetIf();
+
+elem_s* GetElse();
 
 elem_s* GetAss();
 

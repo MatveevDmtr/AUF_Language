@@ -48,7 +48,6 @@
     {                                                                  \
         ip++;                                                          \
                                                                        \
-        elem_s* r_node = next_func;                                    \
         elem_s* l_node = op_node;                                      \
                                                                        \
         if (tcode->Ptr[ip - 1].value.op_v == op1)                      \
@@ -59,6 +58,8 @@
         {                                                              \
             op_node = NewOp(op2);                                      \
         }                                                              \
+                                                                       \
+        elem_s* r_node = next_func;                                    \
                                                                        \
         MakeSons(op_node, l_node, r_node);                             \
     }                                                                  \
@@ -197,8 +198,6 @@
 const size_t MAX_LEN_VAR_NAME   = 30;
 const size_t MIN_LEN_TOKEN_CODE = 10;
 const size_t MAX_LEN_TOKEN_STR  = 30;
-
-typedef unsigned long long bird_t;
 
 typedef int elem_t;
 

@@ -2,46 +2,95 @@
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 --------------------Start program--------------------
-File size = 155
-buffer size: 155
-fread number of symbols: 151
+File size = 305
+buffer size: 305
+fread number of symbols: 298
 tcode created
-line in readVal: Волк Слабее Лев
+line in readVal: Волк Слабее Лев неважно Лев Сильнее Ящерица важно Кот Сильнее Собака
 	Я может и не может: Волк Слабее 6
-		Запомните твари: Волк 5
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
 	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
 num read sym: 0
-line in ReadVar: Волк Слабее Лев
+line in ReadVar: Волк Слабее Лев неважно Лев Сильнее Ящерица важно Кот Сильнее Собака
 	Я может и не может: Волк Слабее 6
-		Запомните твари: Волк 5
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
 	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
-line in readVal: Лев
+line in readVal: Лев неважно Лев Сильнее Ящерица важно Кот Сильнее Собака
 	Я может и не может: Волк Слабее 6
-		Запомните твари: Волк 5
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
 	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
 num read sym: 0
-line in ReadVar: Лев
+line in ReadVar: Лев неважно Лев Сильнее Ящерица важно Кот Сильнее Собака
 	Я может и не может: Волк Слабее 6
-		Запомните твари: Волк 5
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
 	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
-line in readVal: Волк Слабее 6
-		Запомните твари: Волк 5
+line in readVal: Лев Сильнее Ящерица важно Кот Сильнее Собака
+	Я может и не может: Волк Слабее 6
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
 	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
 num read sym: 0
-line in ReadVar: Волк Слабее 6
-		Запомните твари: Волк 5
+line in ReadVar: Лев Сильнее Ящерица важно Кот Сильнее Собака
+	Я может и не может: Волк Слабее 6
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
 	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
-line in readVal: 6
-		Запомните твари: Волк 5
+line in readVal: Ящерица важно Кот Сильнее Собака
+	Я может и не может: Волк Слабее 6
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
 	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
-num read sym: 1
+num read sym: 0
+line in ReadVar: Ящерица важно Кот Сильнее Собака
+	Я может и не может: Волк Слабее 6
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+line in readVal: Кот Сильнее Собака
+	Я может и не может: Волк Слабее 6
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Кот Сильнее Собака
+	Я может и не может: Волк Слабее 6
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
 
 
 ++++++++++Tcode Dump++++++++++
@@ -53,11 +102,11 @@ Capacity = 10
 [0001]:  STR    Волк
 [0002]:  OPR    LESS
 [0003]:  STR    Лев
-[0004]:  NLN    1
-[0005]:  OPR    IF 
-[0006]:  STR    Волк
-[0007]:  OPR    LESS
-[0008]:  VAL    6
+[0004]:  OPR    OR
+[0005]:  STR    Лев
+[0006]:  OPR    BIG
+[0007]:  STR    Ящерица
+[0008]:  OPR    AND
 [0009]:  FREE
 
 ----------Tcode Dump----------
@@ -74,11 +123,11 @@ Capacity = 20
 [0001]:  STR    Волк
 [0002]:  OPR    LESS
 [0003]:  STR    Лев
-[0004]:  NLN    1
-[0005]:  OPR    IF 
-[0006]:  STR    Волк
-[0007]:  OPR    LESS
-[0008]:  VAL    6
+[0004]:  OPR    OR
+[0005]:  STR    Лев
+[0006]:  OPR    BIG
+[0007]:  STR    Ящерица
+[0008]:  OPR    AND
 [0009]:  FREE
 [0010]:  FREE
 [0011]:  FREE
@@ -93,30 +142,59 @@ Capacity = 20
 
 ----------Tcode Dump----------
 
-line in readVal: Волк 5
+line in readVal: Собака
+	Я может и не может: Волк Слабее 6
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
 	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
 num read sym: 0
-line in ReadVar: Волк 5
+line in ReadVar: Собака
+	Я может и не может: Волк Слабее 6
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
 	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
-line in readVal: 5
+line in readVal: Волк Слабее 6
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Волк Слабее 6
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+line in readVal: 6
+		Безумно можно быть первым: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
 	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
 num read sym: 1
-line in readVal: Волк Овца
+line in readVal: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
 num read sym: 0
-line in ReadVar: Волк Овца
+line in ReadVar: Слон Сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
 Запомните твари: Волк Тигр end.
-line in readVal: Овца
-Запомните твари: Волк Тигр end.
-num read sym: 0
-line in ReadVar: Овца
-Запомните твари: Волк Тигр end.
-line in readVal: Волк Тигр end.
-num read sym: 0
-line in ReadVar: Волк Тигр end.
 
 
 ++++++++++Tcode Dump++++++++++
@@ -128,21 +206,21 @@ Capacity = 20
 [0001]:  STR    Волк
 [0002]:  OPR    LESS
 [0003]:  STR    Лев
-[0004]:  NLN    1
-[0005]:  OPR    IF 
-[0006]:  STR    Волк
-[0007]:  OPR    LESS
-[0008]:  VAL    6
-[0009]:  NLN    2
-[0010]:  OPR    ASS
-[0011]:  STR    Волк
-[0012]:  VAL    5
-[0013]:  NLN    1
-[0014]:  OPR    ASS
-[0015]:  STR    Волк
-[0016]:  STR    Овца
-[0017]:  NLN    0
-[0018]:  OPR    ASS
+[0004]:  OPR    OR
+[0005]:  STR    Лев
+[0006]:  OPR    BIG
+[0007]:  STR    Ящерица
+[0008]:  OPR    AND
+[0009]:  STR    Кот
+[0010]:  OPR    BIG
+[0011]:  STR    Собака
+[0012]:  NLN    1
+[0013]:  OPR    IF 
+[0014]:  STR    Волк
+[0015]:  OPR    LESS
+[0016]:  VAL    6
+[0017]:  NLN    2
+[0018]:  OPR    WHIL
 [0019]:  FREE
 
 ----------Tcode Dump----------
@@ -159,21 +237,21 @@ Capacity = 40
 [0001]:  STR    Волк
 [0002]:  OPR    LESS
 [0003]:  STR    Лев
-[0004]:  NLN    1
-[0005]:  OPR    IF 
-[0006]:  STR    Волк
-[0007]:  OPR    LESS
-[0008]:  VAL    6
-[0009]:  NLN    2
-[0010]:  OPR    ASS
-[0011]:  STR    Волк
-[0012]:  VAL    5
-[0013]:  NLN    1
-[0014]:  OPR    ASS
-[0015]:  STR    Волк
-[0016]:  STR    Овца
-[0017]:  NLN    0
-[0018]:  OPR    ASS
+[0004]:  OPR    OR
+[0005]:  STR    Лев
+[0006]:  OPR    BIG
+[0007]:  STR    Ящерица
+[0008]:  OPR    AND
+[0009]:  STR    Кот
+[0010]:  OPR    BIG
+[0011]:  STR    Собака
+[0012]:  NLN    1
+[0013]:  OPR    IF 
+[0014]:  STR    Волк
+[0015]:  OPR    LESS
+[0016]:  VAL    6
+[0017]:  NLN    2
+[0018]:  OPR    WHIL
 [0019]:  FREE
 [0020]:  FREE
 [0021]:  FREE
@@ -198,6 +276,60 @@ Capacity = 40
 
 ----------Tcode Dump----------
 
+line in readVal: Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+line in readVal: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+line in readVal: 5
+	Но хотя бы не я:
+		Запомните твари: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 1
+line in readVal: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Тигр 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+line in readVal: 8
+	Запомните твари: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 1
+line in readVal: Волк Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Волк Овца
+Запомните твари: Волк Тигр end.
+line in readVal: Овца
+Запомните твари: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Овца
+Запомните твари: Волк Тигр end.
+line in readVal: Волк Тигр end.
+num read sym: 0
+line in ReadVar: Волк Тигр end.
 line in readVal: Тигр end.
 num read sym: 0
 line in ReadVar: Тигр end.
@@ -205,54 +337,237 @@ line in ReadVar: Тигр end.
 
 ++++++++++Tcode Dump++++++++++
 
-Size     = 21
+Size     = 39
 Capacity = 40
 
 [0000]:  OPR    IF 
 [0001]:  STR    Волк
 [0002]:  OPR    LESS
 [0003]:  STR    Лев
-[0004]:  NLN    1
-[0005]:  OPR    IF 
-[0006]:  STR    Волк
-[0007]:  OPR    LESS
-[0008]:  VAL    6
-[0009]:  NLN    2
-[0010]:  OPR    ASS
-[0011]:  STR    Волк
-[0012]:  VAL    5
-[0013]:  NLN    1
-[0014]:  OPR    ASS
-[0015]:  STR    Волк
-[0016]:  STR    Овца
-[0017]:  NLN    0
-[0018]:  OPR    ASS
-[0019]:  STR    Волк
-[0020]:  STR    Тигр
-[0021]:  FREE
-[0022]:  FREE
-[0023]:  FREE
-[0024]:  FREE
-[0025]:  FREE
-[0026]:  FREE
-[0027]:  FREE
-[0028]:  FREE
-[0029]:  FREE
-[0030]:  FREE
-[0031]:  FREE
-[0032]:  FREE
-[0033]:  FREE
-[0034]:  FREE
-[0035]:  FREE
-[0036]:  FREE
-[0037]:  FREE
-[0038]:  FREE
+[0004]:  OPR    OR
+[0005]:  STR    Лев
+[0006]:  OPR    BIG
+[0007]:  STR    Ящерица
+[0008]:  OPR    AND
+[0009]:  STR    Кот
+[0010]:  OPR    BIG
+[0011]:  STR    Собака
+[0012]:  NLN    1
+[0013]:  OPR    IF 
+[0014]:  STR    Волк
+[0015]:  OPR    LESS
+[0016]:  VAL    6
+[0017]:  NLN    2
+[0018]:  OPR    WHIL
+[0019]:  STR    Слон
+[0020]:  OPR    BIG
+[0021]:  STR    Лошадь
+[0022]:  NLN    3
+[0023]:  OPR    ASS
+[0024]:  STR    Волк
+[0025]:  VAL    5
+[0026]:  NLN    1
+[0027]:  OPR    ELSE
+[0028]:  NLN    2
+[0029]:  OPR    ASS
+[0030]:  STR    Тигр
+[0031]:  VAL    8
+[0032]:  NLN    1
+[0033]:  OPR    ASS
+[0034]:  STR    Волк
+[0035]:  STR    Овца
+[0036]:  NLN    0
+[0037]:  OPR    ASS
+[0038]:  STR    Волк
 [0039]:  FREE
+
+----------Tcode Dump----------
+
+finish Tcode Recalloc
+
+
+++++++++++Tcode Dump++++++++++
+
+Size     = 39
+Capacity = 80
+
+[0000]:  OPR    IF 
+[0001]:  STR    Волк
+[0002]:  OPR    LESS
+[0003]:  STR    Лев
+[0004]:  OPR    OR
+[0005]:  STR    Лев
+[0006]:  OPR    BIG
+[0007]:  STR    Ящерица
+[0008]:  OPR    AND
+[0009]:  STR    Кот
+[0010]:  OPR    BIG
+[0011]:  STR    Собака
+[0012]:  NLN    1
+[0013]:  OPR    IF 
+[0014]:  STR    Волк
+[0015]:  OPR    LESS
+[0016]:  VAL    6
+[0017]:  NLN    2
+[0018]:  OPR    WHIL
+[0019]:  STR    Слон
+[0020]:  OPR    BIG
+[0021]:  STR    Лошадь
+[0022]:  NLN    3
+[0023]:  OPR    ASS
+[0024]:  STR    Волк
+[0025]:  VAL    5
+[0026]:  NLN    1
+[0027]:  OPR    ELSE
+[0028]:  NLN    2
+[0029]:  OPR    ASS
+[0030]:  STR    Тигр
+[0031]:  VAL    8
+[0032]:  NLN    1
+[0033]:  OPR    ASS
+[0034]:  STR    Волк
+[0035]:  STR    Овца
+[0036]:  NLN    0
+[0037]:  OPR    ASS
+[0038]:  STR    Волк
+[0039]:  FREE
+[0040]:  FREE
+[0041]:  FREE
+[0042]:  FREE
+[0043]:  FREE
+[0044]:  FREE
+[0045]:  FREE
+[0046]:  FREE
+[0047]:  FREE
+[0048]:  FREE
+[0049]:  FREE
+[0050]:  FREE
+[0051]:  FREE
+[0052]:  FREE
+[0053]:  FREE
+[0054]:  FREE
+[0055]:  FREE
+[0056]:  FREE
+[0057]:  FREE
+[0058]:  FREE
+[0059]:  FREE
+[0060]:  FREE
+[0061]:  FREE
+[0062]:  FREE
+[0063]:  FREE
+[0064]:  FREE
+[0065]:  FREE
+[0066]:  FREE
+[0067]:  FREE
+[0068]:  FREE
+[0069]:  FREE
+[0070]:  FREE
+[0071]:  FREE
+[0072]:  FREE
+[0073]:  FREE
+[0074]:  FREE
+[0075]:  FREE
+[0076]:  FREE
+[0077]:  FREE
+[0078]:  FREE
+[0079]:  FREE
+
+----------Tcode Dump----------
+
+
+
+++++++++++Tcode Dump++++++++++
+
+Size     = 40
+Capacity = 80
+
+[0000]:  OPR    IF 
+[0001]:  STR    Волк
+[0002]:  OPR    LESS
+[0003]:  STR    Лев
+[0004]:  OPR    OR
+[0005]:  STR    Лев
+[0006]:  OPR    BIG
+[0007]:  STR    Ящерица
+[0008]:  OPR    AND
+[0009]:  STR    Кот
+[0010]:  OPR    BIG
+[0011]:  STR    Собака
+[0012]:  NLN    1
+[0013]:  OPR    IF 
+[0014]:  STR    Волк
+[0015]:  OPR    LESS
+[0016]:  VAL    6
+[0017]:  NLN    2
+[0018]:  OPR    WHIL
+[0019]:  STR    Слон
+[0020]:  OPR    BIG
+[0021]:  STR    Лошадь
+[0022]:  NLN    3
+[0023]:  OPR    ASS
+[0024]:  STR    Волк
+[0025]:  VAL    5
+[0026]:  NLN    1
+[0027]:  OPR    ELSE
+[0028]:  NLN    2
+[0029]:  OPR    ASS
+[0030]:  STR    Тигр
+[0031]:  VAL    8
+[0032]:  NLN    1
+[0033]:  OPR    ASS
+[0034]:  STR    Волк
+[0035]:  STR    Овца
+[0036]:  NLN    0
+[0037]:  OPR    ASS
+[0038]:  STR    Волк
+[0039]:  STR    Тигр
+[0040]:  FREE
+[0041]:  FREE
+[0042]:  FREE
+[0043]:  FREE
+[0044]:  FREE
+[0045]:  FREE
+[0046]:  FREE
+[0047]:  FREE
+[0048]:  FREE
+[0049]:  FREE
+[0050]:  FREE
+[0051]:  FREE
+[0052]:  FREE
+[0053]:  FREE
+[0054]:  FREE
+[0055]:  FREE
+[0056]:  FREE
+[0057]:  FREE
+[0058]:  FREE
+[0059]:  FREE
+[0060]:  FREE
+[0061]:  FREE
+[0062]:  FREE
+[0063]:  FREE
+[0064]:  FREE
+[0065]:  FREE
+[0066]:  FREE
+[0067]:  FREE
+[0068]:  FREE
+[0069]:  FREE
+[0070]:  FREE
+[0071]:  FREE
+[0072]:  FREE
+[0073]:  FREE
+[0074]:  FREE
+[0075]:  FREE
+[0076]:  FREE
+[0077]:  FREE
+[0078]:  FREE
+[0079]:  FREE
 
 ----------Tcode Dump----------
 
 start making syntax tree
 start CodeBlock
+returning GetAss in GetWhile
+start GetBoolP
 start GetE()
 start GetT()
 start GetDeg()
@@ -261,9 +576,29 @@ start GetE()
 start GetT()
 start GetDeg()
 start GetP()
-start NewLine: ip: 4, tcode->Size: 21
-ip++: 1, curr level: 0
+start GetBoolP
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+start GetBoolP
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+start NewLine: ip: 12, tcode->Size: 40
+NLN: 1, curr level: 0
 start CodeBlock
+returning GetAss in GetWhile
+start GetBoolP
 start GetE()
 start GetT()
 start GetDeg()
@@ -272,9 +607,22 @@ start GetE()
 start GetT()
 start GetDeg()
 start GetP()
-start NewLine: ip: 9, tcode->Size: 21
-ip++: 2, curr level: 1
+start NewLine: ip: 17, tcode->Size: 40
+NLN: 2, curr level: 1
 start CodeBlock
+start GetBoolP
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+start NewLine: ip: 22, tcode->Size: 40
+NLN: 3, curr level: 2
+start CodeBlock
+returning GetAss in GetWhile
 returning GetAss in GetIf
 start GetAss
 start GetVariable
@@ -286,20 +634,54 @@ start GetP()
 content of l_node: Волк
 finish GetAss()
 finish GetTrunkBranch()
-block root: 0000020817f91c30
+block root: 0000015da1963590
 before cycle in CodeBlock
-start NewLine: ip: 13, tcode->Size: 21
-ip++: 1, curr level: 2
+start NewLine: ip: 26, tcode->Size: 40
+NLN: 1, curr level: 3
+level-: 2
+NLN: 1
+block root: 0000015da1963590
+content of l_node in GetWhile: BIG
+finish GetTrunkBranch()
+block root: 0000015da1963b30
+before cycle in CodeBlock
+start NewLine: ip: 26, tcode->Size: 40
+NLN: 1, curr level: 2
 level-: 1
 NLN: 1
-block root: 0000020817f91c30
+block root: 0000015da1963b30
+start NewLine: ip: 26, tcode->Size: 40
+NLN: 1, curr level: 1
+start NewLine: ip: 28, tcode->Size: 40
+NLN: 2, curr level: 1
+start CodeBlock
+returning GetAss in GetWhile
+returning GetAss in GetIf
+start GetAss
+start GetVariable
+got variable in GetAss()
+start GetE()
+start GetT()
+start GetDeg()
+start GetP()
+content of l_node: Тигр
+finish GetAss()
+finish GetTrunkBranch()
+block root: 0000015da1963bd0
+before cycle in CodeBlock
+start NewLine: ip: 32, tcode->Size: 40
+NLN: 1, curr level: 2
+level-: 1
+NLN: 1
+block root: 0000015da1963bd0
 content of l_node in GetIf: LESS
 finish GetTrunkBranch()
-block root: 0000020817fb3af0
+block root: 0000015da1963540
 before cycle in CodeBlock
-start NewLine: ip: 13, tcode->Size: 21
-ip++: 1, curr level: 1
+start NewLine: ip: 32, tcode->Size: 40
+NLN: 1, curr level: 1
 iteration in CodeBlock
+returning GetAss in GetWhile
 returning GetAss in GetIf
 start GetAss
 start GetVariable
@@ -311,21 +693,25 @@ start GetP()
 content of l_node: Волк
 finish GetAss()
 finish GetTrunkBranch()
-found action: 0000020817f974d0, type: STM
-block tail: 0000020817fb3af0end iteration
+found action: 0000015da19639a0, type: STM
+block tail: 0000015da1963540end iteration
 curr_level: 1
-start NewLine: ip: 17, tcode->Size: 21
-ip++: 0, curr level: 1
+start NewLine: ip: 36, tcode->Size: 40
+NLN: 0, curr level: 1
 level-: 0
 NLN: 0
-block root: 0000020817fb3af0
-content of l_node in GetIf: LESS
+block root: 0000015da1963540
+start NewLine: ip: 36, tcode->Size: 40
+NLN: 0, curr level: 0
+returning Empty Block in GetElse
+content of l_node in GetIf: OR
 finish GetTrunkBranch()
-block root: 0000020817f973e0
+block root: 0000015da1963680
 before cycle in CodeBlock
-start NewLine: ip: 17, tcode->Size: 21
-ip++: 0, curr level: 0
+start NewLine: ip: 36, tcode->Size: 40
+NLN: 0, curr level: 0
 iteration in CodeBlock
+returning GetAss in GetWhile
 returning GetAss in GetIf
 start GetAss
 start GetVariable
@@ -337,15 +723,15 @@ start GetP()
 content of l_node: Волк
 finish GetAss()
 finish GetTrunkBranch()
-found action: 0000020817f972a0, type: STM
-block tail: 0000020817f973e0end iteration
+found action: 0000015da1963a40, type: STM
+block tail: 0000015da1963680end iteration
 curr_level: 0
 level-: -1
 NLN: -253499182
-block root: 0000020817f973e0
-tree pointer in HTMLDump: 00000070517ff690
+block root: 0000015da1963680
+tree pointer in HTMLDump: 0000001b92bffc00
 picture name: graphCode0.png
-tree pointer: 00000070517ff690
+tree pointer: 0000001b92bffc00
 start making console cmd
 console cmd: dot -T png -o graphCode0.png dump.dot
 

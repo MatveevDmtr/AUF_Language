@@ -1,92 +1,164 @@
 digraph {
 graph [dpi = 100]rankdir = TB;
 node [ shape=record ];
-Tail [label = "Tail: 0000020817f973e0", style = "filled", rankdir = TB, fillcolor = "indigo", fontcolor = "yellow"];
-struct0000020817f973e0 [
-label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000000000000000|<left>left: 0000020817f918c0|<right>right: 0000020817f972a0}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+Tail [label = "Tail: 0000015da1963680", style = "filled", rankdir = TB, fillcolor = "indigo", fontcolor = "yellow"];
+struct0000015da1963680 [
+label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000000000000000|<left>left: 0000015da1807c90|<right>right: 0000015da1963a40}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f918c0 [
-label = "{<data>elem: IF |<type>type: OP|<parent>parent: 0000020817f973e0|<left>left: 0000020817f919b0|<right>right: 0000020817fb3af0}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+struct0000015da1807c90 [
+label = "{<data>elem: IF |<type>type: OP|<parent>parent: 0000015da1963680|<left>left: 0000015da1801950|<right>right: 0000015da1963540}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f973e0 -> struct0000020817f918c0 [weight=900 constraint=true color=red];
-struct0000020817f919b0 [
-label = "{<data>elem: LESS|<type>type: OP|<parent>parent: 0000020817f918c0|<left>left: 0000020817f91910|<right>right: 0000020817f91960}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+struct0000015da1963680 -> struct0000015da1807c90 [weight=900 constraint=true color=red];
+struct0000015da1801950 [
+label = "{<data>elem: OR|<type>type: OP|<parent>parent: 0000015da1807c90|<left>left: 0000015da1807d30|<right>right: 0000015da1801900}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f918c0 -> struct0000020817f919b0 [weight=900 constraint=true color=red];
-struct0000020817f91910 [
-label = "{<data>elem: Волк|<type>type: VAR|<parent>parent: 0000020817f919b0|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+struct0000015da1807c90 -> struct0000015da1801950 [weight=900 constraint=true color=red];
+struct0000015da1807d30 [
+label = "{<data>elem: LESS|<type>type: OP|<parent>parent: 0000015da1801950|<left>left: 0000015da1807ce0|<right>right: 0000015da1807d80}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f919b0 -> struct0000020817f91910 [weight=900 constraint=true color=red];
-struct0000020817f91960 [
-label = "{<data>elem: Лев|<type>type: VAR|<parent>parent: 0000020817f919b0|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+struct0000015da1801950 -> struct0000015da1807d30 [weight=900 constraint=true color=red];
+struct0000015da1807ce0 [
+label = "{<data>elem: Волк|<type>type: VAR|<parent>parent: 0000015da1807d30|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
 ];
-struct0000020817f919b0 -> struct0000020817f91960 [weight=900 constraint=true color=red];
-struct0000020817fb3af0 [
-label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000020817f918c0|<left>left: 0000020817f91a00|<right>right: 0000020817f974d0}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+struct0000015da1807d30 -> struct0000015da1807ce0 [weight=900 constraint=true color=red];
+struct0000015da1807d80 [
+label = "{<data>elem: Лев|<type>type: VAR|<parent>parent: 0000015da1807d30|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
 ];
-struct0000020817f918c0 -> struct0000020817fb3af0 [weight=900 constraint=true color=red];
-struct0000020817f91a00 [
-label = "{<data>elem: IF |<type>type: OP|<parent>parent: 0000020817fb3af0|<left>left: 0000020817f91af0|<right>right: 0000020817f91c30}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+struct0000015da1807d30 -> struct0000015da1807d80 [weight=900 constraint=true color=red];
+struct0000015da1801900 [
+label = "{<data>elem: AND|<type>type: OP|<parent>parent: 0000015da1801950|<left>left: 0000015da1807e20|<right>right: 0000015da1807f10}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817fb3af0 -> struct0000020817f91a00 [weight=900 constraint=true color=red];
-struct0000020817f91af0 [
-label = "{<data>elem: LESS|<type>type: OP|<parent>parent: 0000020817f91a00|<left>left: 0000020817f91a50|<right>right: 0000020817f91aa0}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+struct0000015da1801950 -> struct0000015da1801900 [weight=900 constraint=true color=red];
+struct0000015da1807e20 [
+label = "{<data>elem: BIG|<type>type: OP|<parent>parent: 0000015da1801900|<left>left: 0000015da1807dd0|<right>right: 0000015da1807e70}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f91a00 -> struct0000020817f91af0 [weight=900 constraint=true color=red];
-struct0000020817f91a50 [
-label = "{<data>elem: Волк|<type>type: VAR|<parent>parent: 0000020817f91af0|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+struct0000015da1801900 -> struct0000015da1807e20 [weight=900 constraint=true color=red];
+struct0000015da1807dd0 [
+label = "{<data>elem: Лев|<type>type: VAR|<parent>parent: 0000015da1807e20|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
 ];
-struct0000020817f91af0 -> struct0000020817f91a50 [weight=900 constraint=true color=red];
-struct0000020817f91aa0 [
-label = "{<data>elem: 6|<type>type: VAL|<parent>parent: 0000020817f91af0|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "aquamarine" 
+struct0000015da1807e20 -> struct0000015da1807dd0 [weight=900 constraint=true color=red];
+struct0000015da1807e70 [
+label = "{<data>elem: Ящерица|<type>type: VAR|<parent>parent: 0000015da1807e20|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
 ];
-struct0000020817f91af0 -> struct0000020817f91aa0 [weight=900 constraint=true color=red];
-struct0000020817f91c30 [
-label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000020817f91a00|<left>left: 0000020817f91b40|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+struct0000015da1807e20 -> struct0000015da1807e70 [weight=900 constraint=true color=red];
+struct0000015da1807f10 [
+label = "{<data>elem: BIG|<type>type: OP|<parent>parent: 0000015da1801900|<left>left: 0000015da1807ec0|<right>right: 0000015da1807f60}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f91a00 -> struct0000020817f91c30 [weight=900 constraint=true color=red];
-struct0000020817f91b40 [
-label = "{<data>elem: ASS|<type>type: OP|<parent>parent: 0000020817f91c30|<left>left: 0000020817f91b90|<right>right: 0000020817f91be0}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+struct0000015da1801900 -> struct0000015da1807f10 [weight=900 constraint=true color=red];
+struct0000015da1807ec0 [
+label = "{<data>elem: Кот|<type>type: VAR|<parent>parent: 0000015da1807f10|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
 ];
-struct0000020817f91c30 -> struct0000020817f91b40 [weight=900 constraint=true color=red];
-struct0000020817f91b90 [
-label = "{<data>elem: Волк|<type>type: VAR|<parent>parent: 0000020817f91b40|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+struct0000015da1807f10 -> struct0000015da1807ec0 [weight=900 constraint=true color=red];
+struct0000015da1807f60 [
+label = "{<data>elem: Собака|<type>type: VAR|<parent>parent: 0000015da1807f10|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
 ];
-struct0000020817f91b40 -> struct0000020817f91b90 [weight=900 constraint=true color=red];
-struct0000020817f91be0 [
-label = "{<data>elem: 5|<type>type: VAL|<parent>parent: 0000020817f91b40|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "aquamarine" 
+struct0000015da1807f10 -> struct0000015da1807f60 [weight=900 constraint=true color=red];
+struct0000015da1963540 [
+label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000015da1807c90|<left>left: 0000015da18019a0|<right>right: 0000015da19639a0}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f91b40 -> struct0000020817f91be0 [weight=900 constraint=true color=red];
-struct0000020817f974d0 [
-label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000020817fb3af0|<left>left: 0000020817fb3b40|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+struct0000015da1807c90 -> struct0000015da1963540 [weight=900 constraint=true color=red];
+struct0000015da18019a0 [
+label = "{<data>elem: IF |<type>type: OP|<parent>parent: 0000015da1963540|<left>left: 0000015da1801a40|<right>right: 0000015da1963860}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817fb3af0 -> struct0000020817f974d0 [weight=900 constraint=true color=red];
-struct0000020817fb3b40 [
-label = "{<data>elem: ASS|<type>type: OP|<parent>parent: 0000020817f974d0|<left>left: 0000020817fb3b90|<right>right: 0000020817fb3be0}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+struct0000015da1963540 -> struct0000015da18019a0 [weight=900 constraint=true color=red];
+struct0000015da1801a40 [
+label = "{<data>elem: LESS|<type>type: OP|<parent>parent: 0000015da18019a0|<left>left: 0000015da18019f0|<right>right: 0000015da1801a90}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f974d0 -> struct0000020817fb3b40 [weight=900 constraint=true color=red];
-struct0000020817fb3b90 [
-label = "{<data>elem: Волк|<type>type: VAR|<parent>parent: 0000020817fb3b40|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+struct0000015da18019a0 -> struct0000015da1801a40 [weight=900 constraint=true color=red];
+struct0000015da18019f0 [
+label = "{<data>elem: Волк|<type>type: VAR|<parent>parent: 0000015da1801a40|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
 ];
-struct0000020817fb3b40 -> struct0000020817fb3b90 [weight=900 constraint=true color=red];
-struct0000020817fb3be0 [
-label = "{<data>elem: Овца|<type>type: VAR|<parent>parent: 0000020817fb3b40|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+struct0000015da1801a40 -> struct0000015da18019f0 [weight=900 constraint=true color=red];
+struct0000015da1801a90 [
+label = "{<data>elem: 6|<type>type: VAL|<parent>parent: 0000015da1801a40|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "aquamarine" 
 ];
-struct0000020817fb3b40 -> struct0000020817fb3be0 [weight=900 constraint=true color=red];
-struct0000020817f972a0 [
-label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000020817f973e0|<left>left: 0000020817f97390|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+struct0000015da1801a40 -> struct0000015da1801a90 [weight=900 constraint=true color=red];
+struct0000015da1963860 [
+label = "{<data>elem: ELSE|<type>type: OP|<parent>parent: 0000015da18019a0|<left>left: 0000015da1963b30|<right>right: 0000015da1963bd0}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f973e0 -> struct0000020817f972a0 [weight=900 constraint=true color=red];
-struct0000020817f97390 [
-label = "{<data>elem: ASS|<type>type: OP|<parent>parent: 0000020817f972a0|<left>left: 0000020817f97340|<right>right: 0000020817f97660}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+struct0000015da18019a0 -> struct0000015da1963860 [weight=900 constraint=true color=red];
+struct0000015da1963b30 [
+label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000015da1963860|<left>left: 0000015da19637c0|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f972a0 -> struct0000020817f97390 [weight=900 constraint=true color=red];
-struct0000020817f97340 [
-label = "{<data>elem: Волк|<type>type: VAR|<parent>parent: 0000020817f97390|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+struct0000015da1963860 -> struct0000015da1963b30 [weight=900 constraint=true color=red];
+struct0000015da19637c0 [
+label = "{<data>elem: WHIL|<type>type: OP|<parent>parent: 0000015da1963b30|<left>left: 0000015da1963ae0|<right>right: 0000015da1963590}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f97390 -> struct0000020817f97340 [weight=900 constraint=true color=red];
-struct0000020817f97660 [
-label = "{<data>elem: Тигр|<type>type: VAR|<parent>parent: 0000020817f97390|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+struct0000015da1963b30 -> struct0000015da19637c0 [weight=900 constraint=true color=red];
+struct0000015da1963ae0 [
+label = "{<data>elem: BIG|<type>type: OP|<parent>parent: 0000015da19637c0|<left>left: 0000015da1963a90|<right>right: 0000015da1963b80}", style = "filled", color = "black", fillcolor = "chartreuse2" 
 ];
-struct0000020817f97390 -> struct0000020817f97660 [weight=900 constraint=true color=red];
+struct0000015da19637c0 -> struct0000015da1963ae0 [weight=900 constraint=true color=red];
+struct0000015da1963a90 [
+label = "{<data>elem: Слон|<type>type: VAR|<parent>parent: 0000015da1963ae0|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+];
+struct0000015da1963ae0 -> struct0000015da1963a90 [weight=900 constraint=true color=red];
+struct0000015da1963b80 [
+label = "{<data>elem: Лошадь|<type>type: VAR|<parent>parent: 0000015da1963ae0|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+];
+struct0000015da1963ae0 -> struct0000015da1963b80 [weight=900 constraint=true color=red];
+struct0000015da1963590 [
+label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000015da19637c0|<left>left: 0000015da1963810|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+];
+struct0000015da19637c0 -> struct0000015da1963590 [weight=900 constraint=true color=red];
+struct0000015da1963810 [
+label = "{<data>elem: ASS|<type>type: OP|<parent>parent: 0000015da1963590|<left>left: 0000015da1963770|<right>right: 0000015da19634f0}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+];
+struct0000015da1963590 -> struct0000015da1963810 [weight=900 constraint=true color=red];
+struct0000015da1963770 [
+label = "{<data>elem: Волк|<type>type: VAR|<parent>parent: 0000015da1963810|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+];
+struct0000015da1963810 -> struct0000015da1963770 [weight=900 constraint=true color=red];
+struct0000015da19634f0 [
+label = "{<data>elem: 5|<type>type: VAL|<parent>parent: 0000015da1963810|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "aquamarine" 
+];
+struct0000015da1963810 -> struct0000015da19634f0 [weight=900 constraint=true color=red];
+struct0000015da1963bd0 [
+label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000015da1963860|<left>left: 0000015da19638b0|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+];
+struct0000015da1963860 -> struct0000015da1963bd0 [weight=900 constraint=true color=red];
+struct0000015da19638b0 [
+label = "{<data>elem: ASS|<type>type: OP|<parent>parent: 0000015da1963bd0|<left>left: 0000015da1963c20|<right>right: 0000015da19636d0}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+];
+struct0000015da1963bd0 -> struct0000015da19638b0 [weight=900 constraint=true color=red];
+struct0000015da1963c20 [
+label = "{<data>elem: Тигр|<type>type: VAR|<parent>parent: 0000015da19638b0|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+];
+struct0000015da19638b0 -> struct0000015da1963c20 [weight=900 constraint=true color=red];
+struct0000015da19636d0 [
+label = "{<data>elem: 8|<type>type: VAL|<parent>parent: 0000015da19638b0|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "aquamarine" 
+];
+struct0000015da19638b0 -> struct0000015da19636d0 [weight=900 constraint=true color=red];
+struct0000015da19639a0 [
+label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000015da1963540|<left>left: 0000015da1963900|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+];
+struct0000015da1963540 -> struct0000015da19639a0 [weight=900 constraint=true color=red];
+struct0000015da1963900 [
+label = "{<data>elem: ASS|<type>type: OP|<parent>parent: 0000015da19639a0|<left>left: 0000015da19635e0|<right>right: 0000015da1963950}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+];
+struct0000015da19639a0 -> struct0000015da1963900 [weight=900 constraint=true color=red];
+struct0000015da19635e0 [
+label = "{<data>elem: Волк|<type>type: VAR|<parent>parent: 0000015da1963900|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+];
+struct0000015da1963900 -> struct0000015da19635e0 [weight=900 constraint=true color=red];
+struct0000015da1963950 [
+label = "{<data>elem: Овца|<type>type: VAR|<parent>parent: 0000015da1963900|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+];
+struct0000015da1963900 -> struct0000015da1963950 [weight=900 constraint=true color=red];
+struct0000015da1963a40 [
+label = "{<data>elem: STM|<type>type: OP|<parent>parent: 0000015da1963680|<left>left: 0000015da19639f0|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+];
+struct0000015da1963680 -> struct0000015da1963a40 [weight=900 constraint=true color=red];
+struct0000015da19639f0 [
+label = "{<data>elem: ASS|<type>type: OP|<parent>parent: 0000015da1963a40|<left>left: 0000015da1963630|<right>right: 0000015da1963720}", style = "filled", color = "black", fillcolor = "chartreuse2" 
+];
+struct0000015da1963a40 -> struct0000015da19639f0 [weight=900 constraint=true color=red];
+struct0000015da1963630 [
+label = "{<data>elem: Волк|<type>type: VAR|<parent>parent: 0000015da19639f0|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+];
+struct0000015da19639f0 -> struct0000015da1963630 [weight=900 constraint=true color=red];
+struct0000015da1963720 [
+label = "{<data>elem: Тигр|<type>type: VAR|<parent>parent: 0000015da19639f0|<left>left: 0000000000000000|<right>right: 0000000000000000}", style = "filled", color = "black", fillcolor = "darkgoldenrod1" 
+];
+struct0000015da19639f0 -> struct0000015da1963720 [weight=900 constraint=true color=red];
 }

@@ -119,7 +119,7 @@ int TreeCtor(tree_t* tree)
 
 elem_s* GetTrunkBranch()
 {
-    elem_s* new_node = GetIf();
+    elem_s* new_node = GetWhile();
 
     if (new_node == NULL)
     {
@@ -129,7 +129,7 @@ elem_s* GetTrunkBranch()
 
     elem_s* node_stm = NewOp(OP_STM);
 
-    ConnectNodes(node_stm, new_node, LEFT); //GetAss is temporary
+    ConnectNodes(node_stm, new_node, LEFT); //GetIf is temporary
 
                                             //the highest func in rec des
     log("finish GetTrunkBranch()\n");
@@ -142,10 +142,15 @@ int GetNewLine()
     log("start NewLine: ip: %zd, tcode->Size: %zd\n", ip, tcode->Size);
 
     if (ip >= tcode->Size)                  return -1;
-    if (tcode->Ptr[ip].type != T_NEWLINE)   return -1;
+    if (tcode->Ptr[ip].type != T_NEWLINE)
+    {
+        log("IN NEWLINE FOUND: %.4s\n", &tcode->Ptr[ip].type);
+
+        return -1;
+    }
 
     ip++;
-    log("ip++: %d, curr level: %d\n", tcode->Ptr[ip - 1].value.int_v, curr_level);
+    log("NLN: %d, curr level: %d\n", tcode->Ptr[ip - 1].value.int_v, curr_level);
     return tcode->Ptr[ip - 1].value.int_v;
 }
 
@@ -243,24 +248,27 @@ elem_s* GetAnd()
 
 elem_s* GetBoolP()
 {
+    log("start GetBoolP\n");
+
     elem_s* node = NULL;
 
-    if (tcode->Ptr[ip].type == T_BRACE &&
-        tcode->Ptr[ip].value.int_v == BR_OPEN)
+    if (tcode->Ptr[ip].type == T_OP &&
+        tcode->Ptr[ip].value.op_v == BR_OPEN)
     {
+        ip++;
+
         node = GetBoolExpr();
 
-        if (tcode->Ptr[ip].type == T_BRACE &&
-        tcode->Ptr[ip].value.int_v == BR_CLOSE)
+        if (tcode->Ptr[ip].type == T_OP &&
+        tcode->Ptr[ip].value.op_v == BR_CLOSE)
         {
+            ip++;
             printf("found closing bracket\n");
         }
         else
         {
             printf("syntax error: closing bracket not found\n");
         }
-
-        ip++;
     }
     else
     {
@@ -282,7 +290,65 @@ elem_s* GetIf()
 
     ip++;
 
-    elem_s* node_ass = NewOp(OP_IF);
+    elem_s* node_if = NewOp(OP_IF);
+
+    elem_s* l_node = GetBoolExpr();
+
+    GetNewLine();
+
+    elem_s* r_node = GetElse();
+
+    log("content of l_node in GetIf: %s\n", l_node->value.str_v);
+
+    MakeSons(node_if, l_node, r_node);
+
+    return node_if;
+}
+
+elem_s* GetElse()
+{
+    elem_s* node_true = GetCodeBlock();
+
+    GetNewLine();
+
+    if (tcode->Ptr[ip].type       != T_OP ||
+        tcode->Ptr[ip].value.op_v != OP_ELSE)
+    {
+        log("returning Empty Block in GetElse\n");
+
+        ip--;
+
+        return node_true;
+    }
+
+    ip++;
+
+    elem_s* node_else = NewOp(OP_ELSE);
+
+    GetNewLine();
+
+    elem_s* node_false = GetCodeBlock();
+
+    //log("content of l_node in GetIf: %s\n", l_node->value.str_v);
+
+    MakeSons(node_else, node_true, node_false);
+
+    return node_else;
+}
+
+elem_s* GetWhile() // remaking
+{
+    if (tcode->Ptr[ip].type       != T_OP ||
+        tcode->Ptr[ip].value.op_v != OP_WHILE)
+    {
+        log("returning GetAss in GetWhile\n");
+
+        return GetIf();
+    }
+
+    ip++;
+
+    elem_s* node_while = NewOp(OP_WHILE);
 
     elem_s* l_node = GetBoolExpr();
 
@@ -290,13 +356,12 @@ elem_s* GetIf()
 
     elem_s* r_node = GetCodeBlock();
 
-    log("content of l_node in GetIf: %s\n", l_node->value.str_v);
+    log("content of l_node in GetWhile: %s\n", l_node->value.str_v);
 
-    MakeSons(node_ass, l_node, r_node);
+    MakeSons(node_while, l_node, r_node);
 
-    return node_ass;
+    return node_while;
 }
-
 
 elem_s* GetVariable()
 {

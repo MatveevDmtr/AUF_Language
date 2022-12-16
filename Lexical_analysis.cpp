@@ -45,14 +45,16 @@ const cmd_t CMD_ELSEIF  = {.Text = "А может я:",
                            .Len  = 10};
 const cmd_t CMD_ELSE    = {.Text = "Но хотя бы не я:",
                            .Len  = 16};
-const cmd_t CMD_WHILE   = {.Text = "Безумно можно быть первым",
-                           .Len  = 25};
+const cmd_t CMD_WHILE   = {.Text = "Безумно можно быть первым:",
+                           .Len  = 26};
 const cmd_t CMD_NEWFUNC = {.Text = "Обид не держу - держу пиво.",
                            .Len  = 27};
 const cmd_t CMD_RETURN  = {.Text = "Сделал дело - дело сделано.",
                            .Len  = 27};
-const cmd_t CMD_BRACE   = {.Text = "АУФ",
-                           .Len  = 3};
+const cmd_t CMD_OPENBR  = {.Text = "АУФ[",
+                           .Len  = 4};
+const cmd_t CMD_CLOSEBR = {.Text = "]АУФ",
+                           .Len  = 4};
 const cmd_t CMD_BIGGER  = {.Text = "Сильнее",
                            .Len  = 7};
 const cmd_t CMD_LESS    = {.Text = "Слабее",
@@ -163,14 +165,20 @@ token_code_t* LexTrans(const char* line)
     {
         if (!ReadOp(&line, &CMD_ASSIGN,  OP_ASS))    continue;
         if (!ReadOp(&line, &CMD_IF,      OP_IF ))    continue;
-        if (!ReadOp(&line, &CMD_ELSEIF,  OP_EIF))    continue;
-        if (!ReadOp(&line, &CMD_ELSE,    OP_ELS))    continue;
-        if (!ReadOp(&line, &CMD_WHILE,   OP_WHI))    continue;
-        if (!ReadOp(&line, &CMD_NEWFUNC, OP_NFU))    continue;
+        if (!ReadOp(&line, &CMD_ELSEIF,  OP_ELIF))   continue;
+        if (!ReadOp(&line, &CMD_ELSE,    OP_ELSE))   continue;
+        if (!ReadOp(&line, &CMD_WHILE,   OP_WHILE))  continue;
+        if (!ReadOp(&line, &CMD_NEWFUNC, OP_NEWF))   continue;
         if (!ReadOp(&line, &CMD_RETURN,  OP_RET))    continue;
+
+        if (!ReadOp(&line, &CMD_OPENBR,  BR_OPEN))   continue;
+        if (!ReadOp(&line, &CMD_CLOSEBR, BR_CLOSE))  continue;
 
         if (!ReadOp(&line, &CMD_BIGGER,  OP_BIGGER)) continue;
         if (!ReadOp(&line, &CMD_LESS,    OP_LESS))   continue;
+
+        if (!ReadOp(&line, &CMD_AND,     OP_AND))    continue;
+        if (!ReadOp(&line, &CMD_OR,      OP_OR))     continue;
 
         if (!ReadOp(&line, &CMD_ADD,     OP_ADD))    continue;
         if (!ReadOp(&line, &CMD_SUB,     OP_SUB))    continue;
@@ -269,6 +277,24 @@ int ReadVal(const char** ptr_line)
 
     return 0;
 }
+
+/*int ReadBraces(const char** ptr_line)
+{
+    static size_t num_brace = 0;
+
+    SkipSpaces(ptr_line);
+
+    if (strncmp(*ptr_line, CMD_BRACE.Text, CMD_BRACE.Len))        return -1;
+
+    if (num_brace % 2 == 0)                 {NewOp(BR_OPEN);}
+    else                                    {NewOp(BR_CLOSE);}
+
+    *ptr_line += CMD_BRACE.Len;
+
+    num_brace += 1;
+
+    return 0;
+}*/
 
 int ReadOp(const char** ptr_line, const cmd_t* cmd_text, size_t cmd_code)
 {
