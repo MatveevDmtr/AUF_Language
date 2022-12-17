@@ -104,14 +104,14 @@
 #define NewVar(line)                                                        \
 ({                                                                          \
     elem_s* __node = CreateNode(NODE_VAR, {.op_v = NULL});                  \
-    strcpy(__node->value.str_v, line);                                       \
+    strcpy(__node->value.str_v, line);                                      \
     __node;                                                                 \
 })
 
 #define NewFunc(line)                                                       \
 ({                                                                          \
     elem_s* __node = CreateNode(NODE_FUNC, {.op_v = NULL});                 \
-    strcpy(__node->value.str_v, line);                                       \
+    strcpy(__node->value.str_v, line);                                      \
     __node;                                                                 \
 })
 

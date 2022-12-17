@@ -40,19 +40,29 @@ enum TOKEN_TYPES
 
 enum COMMANDS
 {
-    OP_STM    = 'MTS',
-    OP_ASS    = 'SSA',
-    OP_IF     = ' FI',
-    OP_ELIF   = 'FILE',
-    OP_ELSE   = 'ESLE',
-    OP_WHILE  = 'LIHW',
-    OP_NEWF   = 'FWEN',
-    OP_RET    = 'TER',
-    OP_BIGGER = 'GIB',
-    OP_LESS   = 'SSEL',
-    OP_AND    = 'DNA',
-    OP_OR     = 'RO' ,
-    OP_INPUT  = 'PNI',
+    OP_STM     = 'MTS',
+    OP_ASS     = 'SSA',
+    OP_IF      = ' FI',
+    OP_ELIF    = 'FILE',
+    OP_ELSE    = 'ESLE',
+    OP_WHILE   = 'LIHW',
+    OP_VOID    = 'DIOV',
+    OP_TYPE    = 'EPYT',
+    OP_RET     = 'TER',
+    OP_BIGGER  = 'GIB',
+    OP_LESS    = 'SSEL',
+    OP_NBIGGER = 'GIBN',
+    OP_NLESS   = 'SELN',
+    OP_EQ      = 'QE',
+    OP_NEQ     = 'QEN',
+    OP_AND     = 'DNA',
+    OP_OR      = 'RO' ,
+    OP_INPUT   = 'PNI',
+    OP_COMMA   = 'MOC',
+    OP_PARAM   = 'RAP',
+    OP_FUNC    = 'CNUF',
+    OP_CALL    = 'LLAC',
+    OP_NIL    = 'LIN',
 };
 
 enum BRACE
@@ -116,6 +126,16 @@ elem_s* GetTrunkBranch();
 elem_s* GetCodeBlock();
 
 int GetG(tree_t* tree, const char* str);
+
+elem_s* GetOpFunc();
+
+elem_s* GetCall();
+
+elem_s* GetRet();
+
+elem_s* GetFuncDef(size_t op_ret, elem_s* (FuncParam)());
+
+elem_s* GetDefParams(elem_s* (FuncParam)());
 
 elem_s* GetWhile();
 

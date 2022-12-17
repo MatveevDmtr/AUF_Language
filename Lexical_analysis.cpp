@@ -37,43 +37,51 @@ const char* FILECODE = "AUF.txt";
 //start language commands
 
 const cmd_t CMD_ASSIGN   = {.Text = "Запомните твари:",
-                           .Len  = 16};
+                            .Len  = strlen(CMD_ASSIGN.Text)};
 const cmd_t CMD_IF       = {.Text = "Я может и не может:",
-                           .Len  = 19};
+                            .Len  = strlen(CMD_IF.Text)};
 const cmd_t CMD_ELSEIF   = {.Text = "А может я:",
-                           .Len  = 10};
+                            .Len  = strlen(CMD_ELSEIF.Text)};
 const cmd_t CMD_ELSE     = {.Text = "Но хотя бы не я:",
-                           .Len  = 16};
+                            .Len  = strlen(CMD_ELSE.Text)};
 const cmd_t CMD_WHILE    = {.Text = "Безумно можно быть первым:",
-                           .Len  = 26};
+                            .Len  = strlen(CMD_WHILE.Text)};
 const cmd_t CMD_NEWVAR   = {.Text = "Лучше иметь друга, чем друг друга:",
-                           .Len  = 34};
-const cmd_t CMD_NEWFUNC  = {.Text = "Обид не держу - держу пиво.",
-                           .Len  = 27};
+                            .Len  = strlen(CMD_NEWVAR.Text)};
+const cmd_t CMD_VOID     = {.Text = "Обид не держу - держу пиво.",
+                            .Len  = strlen(CMD_VOID.Text)};
+const cmd_t CMD_TYPE     = {.Text = "Любят тихо. Громко только пердят.",
+                            .Len  = strlen(CMD_TYPE.Text)};
 const cmd_t CMD_INPUT    = {.Text = "Дед - это как волк, только не волк.",
-                           .Len  = 35};
+                            .Len  = strlen(CMD_INPUT.Text)};
 const cmd_t CMD_RETURN   = {.Text = "Сделал дело - дело сделано.",
-                           .Len  = 27};
+                            .Len  = strlen(CMD_RETURN.Text)};
 const cmd_t CMD_OPENBR   = {.Text = "АУФ[",
-                           .Len  = 4};
+                            .Len  = strlen(CMD_OPENBR.Text)};
 const cmd_t CMD_CLOSEBR  = {.Text = "]АУФ",
-                            .Len  = 4};
+                            .Len  = strlen(CMD_CLOSEBR.Text)};
 const cmd_t CMD_OPENBRS  = {.Text = "(",
-                            .Len  = 1};
+                            .Len  = strlen(CMD_OPENBRS.Text)};
 const cmd_t CMD_CLOSEBRS = {.Text = ")",
-                            .Len  = 1};
+                            .Len  = strlen(CMD_CLOSEBRS.Text)};
 const cmd_t CMD_BIGGER   = {.Text = "сильнее",
-                           .Len  = 7};
+                            .Len  = strlen(CMD_BIGGER.Text)};
 const cmd_t CMD_LESS     = {.Text = "слабее",
-                           .Len  = 6};
+                            .Len  = strlen(CMD_LESS.Text)};
 const cmd_t CMD_NBIGGER  = {.Text = "несильнее",
-                           .Len  = 9};
+                            .Len  = strlen(CMD_NBIGGER.Text)};
 const cmd_t CMD_NLESS    = {.Text = "неслабее",
-                           .Len  = 8};
+                            .Len  = strlen(CMD_NLESS.Text)};
+const cmd_t CMD_EQ       = {.Text = "равный",
+                            .Len  = strlen(CMD_EQ.Text)};
+const cmd_t CMD_NEQ      = {.Text = "неравный",
+                            .Len  = strlen(CMD_NEQ.Text)};
 const cmd_t CMD_AND      = {.Text = "важно",
-                           .Len  = 5};
+                            .Len  = strlen(CMD_AND.Text)};
 const cmd_t CMD_OR       = {.Text = "неважно",
-                           .Len  = 7};
+                            .Len  = strlen(CMD_OR.Text)};
+const cmd_t CMD_COMMA    = {.Text = ",",
+                            .Len  = strlen(CMD_COMMA.Text)};
 
 //Arithmetic
 const cmd_t CMD_ADD   = {.Text = "+",
@@ -174,34 +182,41 @@ token_code_t* LexTrans(const char* line)
 
     while (*line != '\0')
     {
-        if (!ReadOp(&line, &CMD_ASSIGN,   OP_ASS))    continue;
-        if (!ReadOp(&line, &CMD_IF,       OP_IF ))    continue;
-        if (!ReadOp(&line, &CMD_ELSEIF,   OP_ELIF))   continue;
-        if (!ReadOp(&line, &CMD_ELSE,     OP_ELSE))   continue;
-        if (!ReadOp(&line, &CMD_WHILE,    OP_WHILE))  continue;
-        if (!ReadOp(&line, &CMD_NEWFUNC,  OP_NEWF))   continue;
-        if (!ReadOp(&line, &CMD_INPUT,    OP_INPUT))  continue;
-        if (!ReadOp(&line, &CMD_RETURN,   OP_RET))    continue;
+        if (!ReadOp(&line, &CMD_ASSIGN,   OP_ASS))     continue;
+        if (!ReadOp(&line, &CMD_IF,       OP_IF ))     continue;
+        if (!ReadOp(&line, &CMD_ELSEIF,   OP_ELIF))    continue;
+        if (!ReadOp(&line, &CMD_ELSE,     OP_ELSE))    continue;
+        if (!ReadOp(&line, &CMD_WHILE,    OP_WHILE))   continue;
+        if (!ReadOp(&line, &CMD_VOID,     OP_VOID))    continue;
+        if (!ReadOp(&line, &CMD_TYPE,     OP_TYPE))    continue;
+        if (!ReadOp(&line, &CMD_INPUT,    OP_INPUT))   continue;
+        if (!ReadOp(&line, &CMD_RETURN,   OP_RET))     continue;
 
-        if (!ReadOp(&line, &CMD_OPENBR,   BR_OPEN))   continue;
-        if (!ReadOp(&line, &CMD_CLOSEBR,  BR_CLOSE))  continue;
-        if (!ReadOp(&line, &CMD_OPENBRS,  BR_OPEN))   continue;
-        if (!ReadOp(&line, &CMD_CLOSEBRS, BR_CLOSE))  continue;
+        if (!ReadOp(&line, &CMD_OPENBR,   BR_OPEN))    continue;
+        if (!ReadOp(&line, &CMD_CLOSEBR,  BR_CLOSE))   continue;
+        if (!ReadOp(&line, &CMD_OPENBRS,  BR_OPEN))    continue;
+        if (!ReadOp(&line, &CMD_CLOSEBRS, BR_CLOSE))   continue;
 
-        if (!ReadOp(&line, &CMD_BIGGER,   OP_BIGGER)) continue;
-        if (!ReadOp(&line, &CMD_LESS,     OP_LESS))   continue;
+        if (!ReadOp(&line, &CMD_BIGGER,   OP_BIGGER))  continue;
+        if (!ReadOp(&line, &CMD_LESS,     OP_LESS))    continue;
+        if (!ReadOp(&line, &CMD_NBIGGER,  OP_NBIGGER)) continue;
+        if (!ReadOp(&line, &CMD_NLESS,    OP_NLESS))   continue;
+        if (!ReadOp(&line, &CMD_EQ,       OP_EQ))      continue;
+        if (!ReadOp(&line, &CMD_NEQ,      OP_NEQ))     continue;
 
-        if (!ReadOp(&line, &CMD_AND,      OP_AND))    continue;
-        if (!ReadOp(&line, &CMD_OR,       OP_OR))     continue;
+        if (!ReadOp(&line, &CMD_AND,      OP_AND))     continue;
+        if (!ReadOp(&line, &CMD_OR,       OP_OR))      continue;
 
-        if (!ReadOp(&line, &CMD_ADD,      OP_ADD))    continue;
-        if (!ReadOp(&line, &CMD_SUB,      OP_SUB))    continue;
-        if (!ReadOp(&line, &CMD_MUL,      OP_MUL))    continue;
-        if (!ReadOp(&line, &CMD_DIV,      OP_DIV))    continue;
-        if (!ReadOp(&line, &CMD_DEG,      OP_DEG))    continue;
+        if (!ReadOp(&line, &CMD_COMMA,    OP_COMMA))   continue;
 
-        if (!ReadVal(&line))                          continue;
-        if (!ReadVar(&line))                          continue;
+        if (!ReadOp(&line, &CMD_ADD,      OP_ADD))     continue;
+        if (!ReadOp(&line, &CMD_SUB,      OP_SUB))     continue;
+        if (!ReadOp(&line, &CMD_MUL,      OP_MUL))     continue;
+        if (!ReadOp(&line, &CMD_DIV,      OP_DIV))     continue;
+        if (!ReadOp(&line, &CMD_DEG,      OP_DEG))     continue;
+
+        if (!ReadVal(&line))                           continue;
+        if (!ReadVar(&line))                           continue;
 
         printf("Nothing can be read. Exit\n");
 
@@ -246,13 +261,13 @@ int ReadVar(const char** ptr_line)
 {
     SkipSpaces(ptr_line);
 
-    log("line in ReadVar: %s end.\n", *ptr_line);
+    //log("line in ReadVar: %s end.\n", *ptr_line);
 
     size_t num_read_sym = 0;
 
     char var[MAX_LEN_VAR_NAME] = "";
 
-    sscanf(*ptr_line, "%s%n", var, &num_read_sym);
+    sscanf(*ptr_line, "%[а-яА-Я_]%n", var, &num_read_sym);
 
     if (!num_read_sym)
     {

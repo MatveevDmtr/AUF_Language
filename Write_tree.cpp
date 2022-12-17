@@ -5,6 +5,8 @@ int main()
 {
     tree_t* tree = CreateTree();
 
+    log("tree made, start writing\n");
+
     WriteTree(tree->Ptr);
 
     return 0;
@@ -54,12 +56,16 @@ int WriteNode(elem_s* node, FILE* treefile, size_t num_spaces) //remaking
             WriteVar(treefile, node->value.str_v);
             break;
 
+        case NODE_FUNC:
+            WriteVar(treefile, node->value.str_v);
+            break;
+
         case NODE_VAL:
             WriteVal(treefile, node->value.int_v);
             break;
 
         default:
-            printf("TYPE ERROR: Unexpected node type\n");
+            printf("TYPE ERROR: Unexpected node type: %.4s\n", &node->type);
     }
 
     if (node->left)
@@ -68,7 +74,7 @@ int WriteNode(elem_s* node, FILE* treefile, size_t num_spaces) //remaking
 
         WriteNode(node->left, treefile, num_spaces + TAB);
     }
-    else if (node->type == T_OP)
+    else if (node->type == NODE_OP)
     {
         WriteSpaces(num_spaces + TAB, treefile);
 
@@ -79,7 +85,7 @@ int WriteNode(elem_s* node, FILE* treefile, size_t num_spaces) //remaking
     {
         WriteNode(node->right, treefile, num_spaces + TAB);
     }
-    else if (node->type == T_OP)
+    else if (node->type == NODE_OP)
     {
         WriteSpaces(num_spaces + TAB, treefile);
 

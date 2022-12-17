@@ -48,6 +48,8 @@ int MakeSyntaxTree(tree_t* tree)
 
     elem_s* curr_branch = GetCodeBlock(); //!
 
+    Assert(curr_branch == NULL);
+
     tree->Ptr  = curr_branch;
     tree->Tail = curr_branch;
 
@@ -120,7 +122,7 @@ int TreeCtor(tree_t* tree)
 
 elem_s* GetTrunkBranch()
 {
-    elem_s* new_node = GetWhile();
+    elem_s* new_node = GetOpFunc();
 
     if (new_node == NULL)
     {
@@ -130,7 +132,7 @@ elem_s* GetTrunkBranch()
 
     elem_s* node_stm = NewOp(OP_STM);
 
-    ConnectNodes(node_stm, new_node, LEFT); //GetIf is temporary
+    ConnectNodes(node_stm, new_node, LEFT); //GetVoid is temporary
 
                                             //the highest func in rec des
     log("finish GetTrunkBranch()\n");
@@ -178,7 +180,7 @@ elem_s* GetCodeBlock()
         action = GetTrunkBranch();
 
         log("found action: %p, type: %.4s\n", action, &action->value.op_v);
-        log("block tail: %p", block_tail);
+        log("block tail: %p\n", block_tail);
 
         if (action == NULL) continue;
 
@@ -230,6 +232,33 @@ elem_s* GetAss()
     log("finish GetAss()\n");
 
     return node_ass;
+}
+
+elem_s* GetRet()
+{
+    log("start GetRet\n");
+
+    if (tcode->Ptr[ip].type       != T_OP ||
+        tcode->Ptr[ip].value.op_v != OP_RET)
+    {
+        log("Returning GetWhile instead of RET\n");
+
+        return GetWhile();
+    }
+
+    ip++;
+
+    elem_s* node_ret = NewOp(OP_RET);
+
+    elem_s* l_node = GetE();
+
+    log("got expression in GetRet()\n");
+
+    ConnectNodes(node_ret, l_node, LEFT);
+
+    log("finish GetAss()\n");
+
+    return node_ret;
 }
 
 elem_s* GetBoolExpr()
@@ -337,7 +366,7 @@ elem_s* GetElse()
     return node_else;
 }
 
-elem_s* GetWhile() // remaking
+elem_s* GetWhile()
 {
     if (tcode->Ptr[ip].type       != T_OP ||
         tcode->Ptr[ip].value.op_v != OP_WHILE)
@@ -364,9 +393,56 @@ elem_s* GetWhile() // remaking
     return node_while;
 }
 
+elem_s* GetCall()
+{
+    if (!(tcode->Ptr[ip].type == T_STR))
+    {
+        log("returning GetRet in GetCall\n");
+
+        return GetRet();
+    }
+
+    elem_s* node_call = NewOp(OP_CALL);
+
+    elem_s* l_node    = GetFuncDef(OP_NIL, GetE);
+
+    ConnectNodes(node_call, l_node, LEFT);
+
+    return node_call;
+}
+
+elem_s* GetOpFunc()
+{
+    if (!(tcode->Ptr[ip].type == T_OP          &&
+        (tcode->Ptr[ip].value.op_v == OP_VOID  ||
+        tcode->Ptr[ip].value.op_v == OP_TYPE)))
+    {
+        log("returning GetCall in GetVoid\n");
+
+        return GetCall();
+    }
+
+    ip++;
+
+    elem_s* node_void = NewOp(OP_FUNC);
+
+    elem_s* l_node    = NULL;
+
+    if (tcode->Ptr[ip - 1].value.op_v == OP_VOID)   l_node = GetFuncDef(OP_VOID, GetVariable);
+    else                                            l_node = GetFuncDef(OP_TYPE, GetVariable);
+
+    GetNewLine();
+
+    elem_s* r_node = GetCodeBlock();
+
+    MakeSons(node_void, l_node, r_node);
+
+    return node_void;
+}
+
 elem_s* GetVariable()
 {
-    log("start GetVariable\n");
+    log("start GetVariable: ip=%zd\n", ip);
 
     if (tcode->Ptr[ip].type != T_STR)   return NULL;
 
@@ -533,16 +609,113 @@ elem_s* GetVarsAndFuncs()
         //return CreateNode(NODE_VAR, {.var_val = 'x'});
         return NULL;
     }
-    if (tcode->Ptr[ip + 1].type == T_BRACE && tcode->Ptr[ip + 1].value.int_v == BR_OPEN)
+    if (tcode->Ptr[ip + 1].type == T_OP && tcode->Ptr[ip + 1].value.op_v == BR_OPEN)
     {
-        ip++;
-
-        return NewFunc(tcode->Ptr[ip - 1].value.str_v); //MUST CONNECT ARGS
+        return GetCall(); //MUST CONNECT ARGS
     }
 
     ip++;
     return NewVar(tcode->Ptr[ip - 1].value.str_v);
 }
+
+elem_s* GetFuncDef(size_t op_ret, elem_s* (FuncParam)())
+{
+    if (tcode->Ptr[ip].type != T_STR)
+    {
+        printf("Syntax Error: Can't read var function name in definition\n");//SYNTAX ERROR
+
+        return NULL;
+    }
+
+    elem_s* node_fname = NewFunc(tcode->Ptr[ip].value.str_v);
+
+    ConnectNodes(node_fname, NewOp(op_ret), RIGHT);
+
+    ip++;
+
+    log("try to find open brace in ip: %zd\n", ip);
+
+    if (tcode->Ptr[ip].type != T_OP || tcode->Ptr[ip].value.op_v != BR_OPEN)
+    {
+        printf("Syntax Error: No braces after name of function\n");//SYNTAX ERROR
+
+        return NULL;
+    }
+
+    ip++;
+
+    ConnectNodes(node_fname, GetDefParams(FuncParam), LEFT);
+
+    log("try to find closing brace in ip: %zd\n", ip);
+
+    if (tcode->Ptr[ip].type != T_OP || tcode->Ptr[ip].value.op_v != BR_CLOSE)
+    {
+        printf("Syntax Error: No closing brace after def params of function\n");//SYNTAX ERROR
+
+        return NULL;
+    }
+
+    ip++;
+
+    return node_fname;
+}
+
+elem_s* GetDefParams(elem_s* (FuncParam)())
+{
+    log("start GetDefParams\n");
+
+    elem_s* node_var     = FuncParam();
+    elem_s* root_param   = NewOp(OP_PARAM);
+    elem_s* node_param   = NULL;
+
+    log("first var in param: %p\n", node_var);
+
+    if (!node_var)
+    {
+        log("No def params found\n");
+
+        return root_param;
+    }
+
+    ConnectNodes(root_param, node_var, LEFT);
+
+    elem_s* tail_param = root_param;
+
+    log("before cycle in GetDefParam\n");
+
+    while (ip < tcode->Size &&
+           tcode->Ptr[ip].type == T_OP &&
+           tcode->Ptr[ip].value.op_v == OP_COMMA)
+    {
+        ip++;
+
+        log("iteration in CodeBlock\n");
+
+        node_param = NewOp(OP_PARAM);
+        node_var   = FuncParam();
+
+        //log("found var: %p, type: %.4s\n", action, &action->value.op_v);
+        //log("block tail: %p", block_tail);
+
+        if (node_var == NULL)
+        {
+            printf("Syntax Error: No Variable after a comma\n");
+            continue;
+        }
+        ConnectNodes(node_param, node_var,   LEFT);
+        ConnectNodes(tail_param, node_param, RIGHT);
+
+        tail_param = node_param;
+
+        log("end iteration in GetDefParams\n");
+    }
+    log("ret from GetParams, ip: %zd\n", ip);
+    return root_param;
+}
+
+/*elem_s* GetParam()
+{
+}*/
 
 elem_s* GetDeg()
 {
