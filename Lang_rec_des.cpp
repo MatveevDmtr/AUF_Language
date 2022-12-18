@@ -1,4 +1,4 @@
-//#include <TXLib.h>
+#include <TXLib.h>
 #include <string.h>
 
 
@@ -24,6 +24,8 @@ int SearchVar(char* var);
 token_code_t* tcode = NULL;
 
 static int curr_level = -1;
+
+static size_t curr_line = 1;
 
 tree_t* CreateTree()
 {
@@ -52,15 +54,6 @@ int MakeSyntaxTree(tree_t* tree)
 
     tree->Ptr  = curr_branch;
     tree->Tail = curr_branch;
-
-    /*while (ip < tcode->Size)
-    {
-        curr_branch = GetTrunkBranch();
-
-        ConnectNodes(tree->Tail, curr_branch, RIGHT);
-
-        tree->Tail = curr_branch;
-    }*/
 
     return 0;
 }
@@ -95,21 +88,9 @@ int TreeCtor(tree_t* tree)
         return SEGFAULT;
     }
 
-    if (!(tree->DeadInside))
-    {
-        LogError(CONSTR_ERROR);
-
-        return CONSTR_ERROR;
-    }
-
     void* temp_ptr = (elem_s*) calloc(1, sizeof(elem_s));
 
-    if (temp_ptr == NULL)
-    {
-        LogError(REALLOCERROR);
-
-        return REALLOCERROR;
-    }
+    Assert (temp_ptr == NULL);
 
     tree->Ptr                = (elem_s*)(temp_ptr);
     tree->Tail               = (elem_s*)(temp_ptr);
@@ -132,7 +113,7 @@ elem_s* GetTrunkBranch()
 
     elem_s* node_stm = NewOp(OP_STM);
 
-    ConnectNodes(node_stm, new_node, LEFT); //GetVoid is temporary
+    ConnectNodes(node_stm, new_node, LEFT); //GetOpFunc is temporary
 
                                             //the highest func in rec des
     log("finish GetTrunkBranch()\n");
@@ -147,11 +128,13 @@ int GetNewLine()
     if (ip >= tcode->Size)                  return -1;
     if (tcode->Ptr[ip].type != T_NEWLINE)
     {
-        log("IN NEWLINE FOUND: %.4s\n", &tcode->Ptr[ip].type);
+        LogError(NEWLINE_ERROR);
 
         return -1;
     }
 
+    curr_line++;
+    log("new line found (curr_line): %d\n", curr_line);
     ip++;
     log("NLN: %d, curr level: %d\n", tcode->Ptr[ip - 1].value.int_v, curr_level);
     return tcode->Ptr[ip - 1].value.int_v;
@@ -198,7 +181,8 @@ elem_s* GetCodeBlock()
     log("NLN: %d\n", tcode->Ptr[ip - 1].value.int_v);
     log("block root: %p\n", block_root);
 
-    ip--; //because newline was already scanned
+    ip--;           //because newline was already scanned
+    curr_line--;    //because newline was already scanned
 
     return block_root;
 }
@@ -210,7 +194,7 @@ elem_s* GetAss()
     if (tcode->Ptr[ip].type       != T_OP ||
         tcode->Ptr[ip].value.op_v != OP_ASS)
     {
-        log("found %.4s (%s) instead of ASS\n", &tcode->Ptr[ip].type, &tcode->Ptr[ip].value.str_v);
+        LogError(GETASS_ERROR);
 
         return NULL;
     }
@@ -292,12 +276,11 @@ elem_s* GetBoolP()
         if (tcode->Ptr[ip].type == T_OP &&
         tcode->Ptr[ip].value.op_v == BR_CLOSE)
         {
-            ip++;
-            printf("found closing bracket\n");
+            ip++; //found closing brace
         }
         else
         {
-            printf("syntax error: closing bracket not found\n");
+            LogError(CLOSEBRACE_ERROR);
         }
     }
     else
@@ -444,7 +427,12 @@ elem_s* GetVariable()
 {
     log("start GetVariable: ip=%zd\n", ip);
 
-    if (tcode->Ptr[ip].type != T_STR)   return NULL;
+    if (tcode->Ptr[ip].type != T_STR)
+    {
+        LogError(VARIABLE_ERROR);
+
+        return NULL;
+    }
 
     ip++;
 
@@ -605,13 +593,13 @@ elem_s* GetVarsAndFuncs()
 {
     if (tcode->Ptr[ip].type != T_STR)
     {
-        printf("Syntax Error: Can't read var of func name\n");//SYNTAX ERROR
-        //return CreateNode(NODE_VAR, {.var_val = 'x'});
+        LogError(VARFUNC_ERROR);
+
         return NULL;
     }
     if (tcode->Ptr[ip + 1].type == T_OP && tcode->Ptr[ip + 1].value.op_v == BR_OPEN)
     {
-        return GetCall(); //MUST CONNECT ARGS
+        return GetCall();
     }
 
     ip++;
@@ -622,7 +610,7 @@ elem_s* GetFuncDef(size_t op_ret, elem_s* (FuncParam)())
 {
     if (tcode->Ptr[ip].type != T_STR)
     {
-        printf("Syntax Error: Can't read var function name in definition\n");//SYNTAX ERROR
+        LogError(FUNCNAME_ERROR);//SYNTAX ERROR
 
         return NULL;
     }
@@ -637,7 +625,7 @@ elem_s* GetFuncDef(size_t op_ret, elem_s* (FuncParam)())
 
     if (tcode->Ptr[ip].type != T_OP || tcode->Ptr[ip].value.op_v != BR_OPEN)
     {
-        printf("Syntax Error: No braces after name of function\n");//SYNTAX ERROR
+        LogError(OPENBRACE_ERROR);//SYNTAX ERROR
 
         return NULL;
     }
@@ -650,7 +638,7 @@ elem_s* GetFuncDef(size_t op_ret, elem_s* (FuncParam)())
 
     if (tcode->Ptr[ip].type != T_OP || tcode->Ptr[ip].value.op_v != BR_CLOSE)
     {
-        printf("Syntax Error: No closing brace after def params of function\n");//SYNTAX ERROR
+        LogError(CLOSEBRACE_ERROR);//SYNTAX ERROR
 
         return NULL;
     }
@@ -699,7 +687,7 @@ elem_s* GetDefParams(elem_s* (FuncParam)())
 
         if (node_var == NULL)
         {
-            printf("Syntax Error: No Variable after a comma\n");
+            LogError(VARAFTERCOMMA_ERROR);
             continue;
         }
         ConnectNodes(node_param, node_var,   LEFT);
@@ -736,7 +724,7 @@ elem_s* GetDeg()
     return op_node;
 }
 
-elem_s* GetE()//not remade
+elem_s* GetE()
 {
     log("start GetE()\n");
 
@@ -816,13 +804,11 @@ elem_s* GetP()
         if (tcode->Ptr[ip].type == T_OP &&
         tcode->Ptr[ip].value.op_v == BR_CLOSE)
         {
-            ip++;
-
-            printf("found closing bracket\n");
+            ip++; //found closing bracket
         }
         else
         {
-            printf("syntax error: closing bracket not found\n");
+            LogError(CLOSEBRACE_ERROR);
         }
     }
     else
@@ -987,13 +973,16 @@ void GraphTreeDump(const tree_t* tree, const char* picname)
 
     log("console cmd: %s\n", console_cmd);
 
-    printf("%d\n", system("cd D:"));
-    printf("%d\n", system("cd D:\\Programming\\C\\Ded_course_1_sem\\AUF Language"));
-    printf("%d\n", system(console_cmd));
+    system("cd D:");
+    system("cd D:\\Programming\\C\\Ded_course_1_sem\\AUF Language");
+    system(console_cmd);
 }
 
 int LogCritError(int errcode, const char* func, int line)
 {
+    printf("Вы меня не поправляйте - я вам не трусы!\n");
+    printf("Одна ошибка - и ты ошибся в строке %d!\n", curr_line);
+
     switch (errcode)
     {
         case OK:
@@ -1001,43 +990,55 @@ int LogCritError(int errcode, const char* func, int line)
             break;
 
         case SEGFAULT:
-            print_crit_errors("SEGMENTATION FAULT: Invalid Pointer to Structure of Stack", func, line);
+            FramedConsoleError("SEGMENTATION FAULT: Invalid Pointer to Structure of Stack");
             break;
 
         case ZOMBIE:
-            print_crit_errors("DEADINSIDE ERROR: Stack doesn't exist", func, line);
+            FramedConsoleError("DEADINSIDE ERROR: Stack doesn't exist");
             break;
 
         case NULLPTR:
-            print_crit_errors("POINTER ERROR: Stack Pointer (pointer to buffer) is NULL", func, line);
+            FramedConsoleError("POINTER ERROR: Stack Pointer (pointer to buffer) is NULL");
             break;
 
-        case SIZEPOISONED:
-            print_crit_errors("SIZE ERROR: Stack Size is poisoned", func, line);
+        case NEWLINE_ERROR:
+            FramedConsoleError("Волк слабее льва и тигра, но зато он новые строчки ставит");
             break;
 
-        case NEGCAP:
-            print_crit_errors("CAPACITY ERROR: Stack Capacity has a Negative Value", func, line);
+        case GETASS_ERROR:
+            FramedConsoleError("Волк не тот, кто получил присваивание, а тот, кто получил по жопе");
             break;
 
-        case STACKOVERFLOW:
-            print_crit_errors("STACK OVERFLOW ERROR: Size of Stack is bigger than its Capacity", func, line);
+        case VARIABLE_ERROR:
+            FramedConsoleError("Лучше посрать и опоздать, чем придти и не написать имя переменной");
             break;
 
-        case FREE_ERROR:
-            print_crit_errors("FREE ERROR: Index of free unit is invalid", func, line);
+        case VARFUNC_ERROR:
+            FramedConsoleError("Лучше получить функцию или переменную, чем обосраться");
             break;
 
-        case CHAINERROR:
-            print_crit_errors("CHAIN ERROR: Invalid Next-Prev Connection between elements", func, line);
+        case FUNCNAME_ERROR:
+            FramedConsoleError("Если вас поливают говном, значит вы не указали функцию");
             break;
 
-        case CONSTR_ERROR:
-            print_crit_errors("CONSTRUCTION ERROR: Trying to construct an existing Tree", func, line);
+        case OPENBRACE_ERROR:
+            FramedConsoleError("Падение - это не провал. Провал - это провал. Падение - это там, где продолбал открывающую скобку");
+            break;
+
+        case CLOSEBRACE_ERROR:
+            FramedConsoleError("Я не умею ставить закрывающие скобки, я умею только дрочить");
+            break;
+
+        case VARAFTERCOMMA_ERROR:
+            FramedConsoleError("Моя жопа - мои правила! Не нравятся правила? Ставь переменные после запятых");
+            break;
+
+        case READNODE_ERROR:
+            FramedConsoleError("Я скомуниздил у тебя твою дичь, а потом не смог её прочитать");
             break;
 
         default:
-            print_crit_errors("DECODE ERROR: Unexpected Error Code", func, line);
+            FramedConsoleError("ОГО, да у нас ошибка в ОШИБКЕ!");
             return 1;
     }
 

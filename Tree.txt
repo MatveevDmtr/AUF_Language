@@ -1,79 +1,115 @@
-{ STM }
-    { FUNC }
-        { "БесплатныйСыр" }
-            { PAR }
+{ STM 
+    { FUNC 
+        { "БесплатныйСыр" 
+            { PAR 
                 { "Сыр" }
-                { PAR }
-                    { "Дырки" }
-                    { NIL }
-            { TYPE }
+                { NIL }
+            }
+            { TYPE 
                 { NIL }
                 { NIL }
-        { STM }
-            { ASS }
+            }
+        }
+        { STM 
+            { ASS 
                 { "Сыр" }
                 { 4 }
-            { STM }
-                { RET }
+            }
+            { STM 
+                { RET 
                     { "Сыр" }
                     { NIL }
+                }
                 { NIL }
-    { STM }
-        { IF  }
-            { OR }
-                { LESS }
+            }
+        }
+    }
+    { STM 
+        { IF 
+            { OR 
+                { LESS 
                     { "Волк" }
                     { "Лев" }
-                { AND }
-                    { BIG }
+                }
+                { AND 
+                    { BIG 
                         { "Лев" }
                         { "Ящерица" }
-                    { BIG }
+                    }
+                    { BIG 
                         { "Кот" }
                         { "Собака" }
-            { STM }
-                { IF  }
-                    { LESS }
+                    }
+                }
+            }
+            { STM 
+                { IF 
+                    { LESS 
                         { "Волк" }
-                        { MUL }
+                        { MUL 
                             { 8 }
-                            { ADD }
+                            { ADD 
                                 { 5 }
                                 { 7 }
-                    { ELSE }
-                        { STM }
-                            { WHIL }
-                                { BIG }
+                            }
+                        }
+                    }
+                    { ELSE 
+                        { STM 
+                            { WHIL 
+                                { BIG 
                                     { "Слон" }
                                     { "Лошадь" }
-                                { STM }
-                                    { ASS }
+                                }
+                                { STM 
+                                    { ASS 
                                         { "Волк" }
                                         { 5 }
+                                    }
                                     { NIL }
+                                }
+                            }
                             { NIL }
-                        { STM }
-                            { ASS }
+                        }
+                        { STM 
+                            { ASS 
                                 { "Тигр" }
-                                { CALL }
-                                    { "БесплатныйСыр" }
-                                        { PAR }
+                                { CALL 
+                                    { "БесплатныйСыр" 
+                                        { PAR 
                                             { 9 }
-                                            { PAR }
+                                            { PAR 
                                                 { 3 }
                                                 { NIL }
-                                        { NIL }
+                                            }
+                                        }
+                                        { NIL 
                                             { NIL }
                                             { NIL }
+                                        }
+                                    }
                                     { NIL }
+                                }
+                            }
                             { NIL }
-                { STM }
-                    { ASS }
+                        }
+                    }
+                }
+                { STM 
+                    { ASS 
                         { "Волк" }
                         { "Овца" }
+                    }
                     { NIL }
-        { STM }
-            { ASS }
+                }
+            }
+        }
+        { STM 
+            { ASS 
                 { "Ага" }
                 { "Тигр" }
+            }
             { NIL }
+        }
+    }
+}

@@ -1,18 +1,6 @@
 #include "lang_rec_des.h"
 #include "auf_lang.h"
 
-int main()
-{
-    tree_t* tree = CreateTree();
-
-    log("tree made, start writing\n");
-
-    WriteTree(tree->Ptr);
-
-    return 0;
-}
-
-
 int WriteTree(elem_s* root)
 {
     log("Start writing tree\n");
@@ -39,6 +27,8 @@ int WriteTree(elem_s* root)
 
 int WriteNode(elem_s* node, FILE* treefile, size_t num_spaces) //remaking
 {
+    bool have_children = false;
+
     Assert(node     == nullptr);
     Assert(treefile == nullptr);
 
@@ -46,10 +36,14 @@ int WriteNode(elem_s* node, FILE* treefile, size_t num_spaces) //remaking
 
     WriteSpaces(num_spaces, treefile);
 
+    fprintf(treefile, "{");
+    //WriteSpaces(num_spaces, treefile);
     switch (node->type)
     {
         case NODE_OP:
+            have_children = true;
             WriteOp(treefile, node->value.op_v);
+            fprintf(treefile, "\n");
             break;
 
         case NODE_VAR:
@@ -57,7 +51,9 @@ int WriteNode(elem_s* node, FILE* treefile, size_t num_spaces) //remaking
             break;
 
         case NODE_FUNC:
+            have_children = true;
             WriteVar(treefile, node->value.str_v);
+            fprintf(treefile, "\n");
             break;
 
         case NODE_VAL:
@@ -70,8 +66,6 @@ int WriteNode(elem_s* node, FILE* treefile, size_t num_spaces) //remaking
 
     if (node->left)
     {
-        //log("try to write left son of %s\n", node->elem);
-
         WriteNode(node->left, treefile, num_spaces + TAB);
     }
     else if (node->type == NODE_OP)
@@ -92,6 +86,10 @@ int WriteNode(elem_s* node, FILE* treefile, size_t num_spaces) //remaking
         fprintf(treefile, "{ NIL }\n");
     }
 
+    if (have_children)          WriteSpaces(num_spaces, treefile);
+
+    fprintf(treefile, "}\n");
+
     return 0;
 }
 
@@ -107,15 +105,15 @@ void WriteSpaces(int num_spaces, FILE* treefile)
 
 int WriteOp(FILE* treefile, size_t op)
 {
-    fprintf(treefile, "{ %.4s }\n", &op);
+    fprintf(treefile, " %.4s ", &op);
 }
 
 int WriteVar(FILE* treefile, char* var)
 {
-    fprintf(treefile, "{ \"%s\" }\n", var);
+    fprintf(treefile, " \"%s\" ", var);
 }
 
 int WriteVal(FILE* treefile, int val)
 {
-    fprintf(treefile, "{ %d }\n", val);
+    fprintf(treefile, " %d ", val);
 }

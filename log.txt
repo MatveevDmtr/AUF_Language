@@ -2,11 +2,11 @@
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 --------------------Start program--------------------
-File size = 458
-buffer size: 458
-fread number of symbols: 448
+File size = 451
+buffer size: 451
+fread number of symbols: 441
 tcode created
-line in readVal: БесплатныйСыр(Сыр, Дырки)
+line in readVal: БесплатныйСыр(Сыр)
 	Запомните твари: Сыр 4
 	Сделал дело - дело сделано. Сыр
 Я может и не может: Волк слабее Лев неважно Лев сильнее Ящерица важно Кот сильнее Собака
@@ -18,19 +18,7 @@ line in readVal: БесплатныйСыр(Сыр, Дырки)
 	Запомните твари: Волк Овца
 Запомните твари: Ага Тигр end.
 num read sym: 0
-line in readVal: Сыр, Дырки)
-	Запомните твари: Сыр 4
-	Сделал дело - дело сделано. Сыр
-Я может и не может: Волк слабее Лев неважно Лев сильнее Ящерица важно Кот сильнее Собака
-	Я может и не может: Волк слабее 8 * АУФ[ 5+7 ]АУФ
-		Безумно можно быть первым: Слон сильнее Лошадь
-			Запомните твари: Волк 5
-	Но хотя бы не я:
-		Запомните твари: Тигр БесплатныйСыр(9, 3)
-	Запомните твари: Волк Овца
-Запомните твари: Ага Тигр end.
-num read sym: 0
-line in readVal: Дырки)
+line in readVal: Сыр)
 	Запомните твари: Сыр 4
 	Сделал дело - дело сделано. Сыр
 Я может и не может: Волк слабее Лев неважно Лев сильнее Ящерица важно Кот сильнее Собака
@@ -53,6 +41,17 @@ line in readVal: Сыр 4
 	Запомните твари: Волк Овца
 Запомните твари: Ага Тигр end.
 num read sym: 0
+line in readVal: 4
+	Сделал дело - дело сделано. Сыр
+Я может и не может: Волк слабее Лев неважно Лев сильнее Ящерица важно Кот сильнее Собака
+	Я может и не может: Волк слабее 8 * АУФ[ 5+7 ]АУФ
+		Безумно можно быть первым: Слон сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр БесплатныйСыр(9, 3)
+	Запомните твари: Волк Овца
+Запомните твари: Ага Тигр end.
+num read sym: 1
 
 
 ++++++++++Tcode Dump++++++++++
@@ -64,11 +63,11 @@ Capacity = 10
 [0001]:  STR    БесплатныйСыр
 [0002]:  OPR    OPEN
 [0003]:  STR    Сыр
-[0004]:  OPR    COM
-[0005]:  STR    Дырки
-[0006]:  OPR    CLOS
-[0007]:  NLN    1
-[0008]:  OPR    ASS
+[0004]:  OPR    CLOS
+[0005]:  NLN    1
+[0006]:  OPR    ASS
+[0007]:  STR    Сыр
+[0008]:  VAL    4
 [0009]:  FREE
 
 ----------Tcode Dump----------
@@ -85,11 +84,11 @@ Capacity = 20
 [0001]:  STR    БесплатныйСыр
 [0002]:  OPR    OPEN
 [0003]:  STR    Сыр
-[0004]:  OPR    COM
-[0005]:  STR    Дырки
-[0006]:  OPR    CLOS
-[0007]:  NLN    1
-[0008]:  OPR    ASS
+[0004]:  OPR    CLOS
+[0005]:  NLN    1
+[0006]:  OPR    ASS
+[0007]:  STR    Сыр
+[0008]:  VAL    4
 [0009]:  FREE
 [0010]:  FREE
 [0011]:  FREE
@@ -104,17 +103,6 @@ Capacity = 20
 
 ----------Tcode Dump----------
 
-line in readVal: 4
-	Сделал дело - дело сделано. Сыр
-Я может и не может: Волк слабее Лев неважно Лев сильнее Ящерица важно Кот сильнее Собака
-	Я может и не может: Волк слабее 8 * АУФ[ 5+7 ]АУФ
-		Безумно можно быть первым: Слон сильнее Лошадь
-			Запомните твари: Волк 5
-	Но хотя бы не я:
-		Запомните твари: Тигр БесплатныйСыр(9, 3)
-	Запомните твари: Волк Овца
-Запомните твари: Ага Тигр end.
-num read sym: 1
 line in readVal: Сыр
 Я может и не может: Волк слабее Лев неважно Лев сильнее Ящерица важно Кот сильнее Собака
 	Я может и не может: Волк слабее 8 * АУФ[ 5+7 ]АУФ
@@ -143,6 +131,15 @@ line in readVal: Лев неважно Лев сильнее Ящерица важно Кот сильнее Собака
 	Запомните твари: Волк Овца
 Запомните твари: Ага Тигр end.
 num read sym: 0
+line in readVal: Лев сильнее Ящерица важно Кот сильнее Собака
+	Я может и не может: Волк слабее 8 * АУФ[ 5+7 ]АУФ
+		Безумно можно быть первым: Слон сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр БесплатныйСыр(9, 3)
+	Запомните твари: Волк Овца
+Запомните твари: Ага Тигр end.
+num read sym: 0
 
 
 ++++++++++Tcode Dump++++++++++
@@ -154,20 +151,20 @@ Capacity = 20
 [0001]:  STR    БесплатныйСыр
 [0002]:  OPR    OPEN
 [0003]:  STR    Сыр
-[0004]:  OPR    COM
-[0005]:  STR    Дырки
-[0006]:  OPR    CLOS
-[0007]:  NLN    1
-[0008]:  OPR    ASS
-[0009]:  STR    Сыр
-[0010]:  VAL    4
-[0011]:  NLN    1
-[0012]:  OPR    RET
-[0013]:  STR    Сыр
-[0014]:  NLN    0
-[0015]:  OPR    IF 
-[0016]:  STR    Волк
-[0017]:  OPR    LESS
+[0004]:  OPR    CLOS
+[0005]:  NLN    1
+[0006]:  OPR    ASS
+[0007]:  STR    Сыр
+[0008]:  VAL    4
+[0009]:  NLN    1
+[0010]:  OPR    RET
+[0011]:  STR    Сыр
+[0012]:  NLN    0
+[0013]:  OPR    IF
+[0014]:  STR    Волк
+[0015]:  OPR    LESS
+[0016]:  STR    Лев
+[0017]:  OPR    OR
 [0018]:  STR    Лев
 [0019]:  FREE
 
@@ -185,20 +182,20 @@ Capacity = 40
 [0001]:  STR    БесплатныйСыр
 [0002]:  OPR    OPEN
 [0003]:  STR    Сыр
-[0004]:  OPR    COM
-[0005]:  STR    Дырки
-[0006]:  OPR    CLOS
-[0007]:  NLN    1
-[0008]:  OPR    ASS
-[0009]:  STR    Сыр
-[0010]:  VAL    4
-[0011]:  NLN    1
-[0012]:  OPR    RET
-[0013]:  STR    Сыр
-[0014]:  NLN    0
-[0015]:  OPR    IF 
-[0016]:  STR    Волк
-[0017]:  OPR    LESS
+[0004]:  OPR    CLOS
+[0005]:  NLN    1
+[0006]:  OPR    ASS
+[0007]:  STR    Сыр
+[0008]:  VAL    4
+[0009]:  NLN    1
+[0010]:  OPR    RET
+[0011]:  STR    Сыр
+[0012]:  NLN    0
+[0013]:  OPR    IF
+[0014]:  STR    Волк
+[0015]:  OPR    LESS
+[0016]:  STR    Лев
+[0017]:  OPR    OR
 [0018]:  STR    Лев
 [0019]:  FREE
 [0020]:  FREE
@@ -224,15 +221,6 @@ Capacity = 40
 
 ----------Tcode Dump----------
 
-line in readVal: Лев сильнее Ящерица важно Кот сильнее Собака
-	Я может и не может: Волк слабее 8 * АУФ[ 5+7 ]АУФ
-		Безумно можно быть первым: Слон сильнее Лошадь
-			Запомните твари: Волк 5
-	Но хотя бы не я:
-		Запомните твари: Тигр БесплатныйСыр(9, 3)
-	Запомните твари: Волк Овца
-Запомните твари: Ага Тигр end.
-num read sym: 0
 line in readVal: Ящерица важно Кот сильнее Собака
 	Я может и не может: Волк слабее 8 * АУФ[ 5+7 ]АУФ
 		Безумно можно быть первым: Слон сильнее Лошадь
@@ -292,6 +280,13 @@ line in readVal: 7 ]АУФ
 	Запомните твари: Волк Овца
 Запомните твари: Ага Тигр end.
 num read sym: 1
+line in readVal: Слон сильнее Лошадь
+			Запомните твари: Волк 5
+	Но хотя бы не я:
+		Запомните твари: Тигр БесплатныйСыр(9, 3)
+	Запомните твари: Волк Овца
+Запомните твари: Ага Тигр end.
+num read sym: 0
 
 
 ++++++++++Tcode Dump++++++++++
@@ -303,41 +298,41 @@ Capacity = 40
 [0001]:  STR    БесплатныйСыр
 [0002]:  OPR    OPEN
 [0003]:  STR    Сыр
-[0004]:  OPR    COM
-[0005]:  STR    Дырки
-[0006]:  OPR    CLOS
-[0007]:  NLN    1
-[0008]:  OPR    ASS
-[0009]:  STR    Сыр
-[0010]:  VAL    4
-[0011]:  NLN    1
-[0012]:  OPR    RET
-[0013]:  STR    Сыр
-[0014]:  NLN    0
-[0015]:  OPR    IF 
-[0016]:  STR    Волк
-[0017]:  OPR    LESS
+[0004]:  OPR    CLOS
+[0005]:  NLN    1
+[0006]:  OPR    ASS
+[0007]:  STR    Сыр
+[0008]:  VAL    4
+[0009]:  NLN    1
+[0010]:  OPR    RET
+[0011]:  STR    Сыр
+[0012]:  NLN    0
+[0013]:  OPR    IF
+[0014]:  STR    Волк
+[0015]:  OPR    LESS
+[0016]:  STR    Лев
+[0017]:  OPR    OR
 [0018]:  STR    Лев
-[0019]:  OPR    OR
-[0020]:  STR    Лев
-[0021]:  OPR    BIG
-[0022]:  STR    Ящерица
-[0023]:  OPR    AND
-[0024]:  STR    Кот
-[0025]:  OPR    BIG
-[0026]:  STR    Собака
-[0027]:  NLN    1
-[0028]:  OPR    IF 
-[0029]:  STR    Волк
-[0030]:  OPR    LESS
-[0031]:  VAL    8
-[0032]:  OPR    MUL
-[0033]:  OPR    OPEN
-[0034]:  VAL    5
-[0035]:  OPR    ADD
-[0036]:  VAL    7
-[0037]:  OPR    CLOS
-[0038]:  NLN    2
+[0019]:  OPR    BIG
+[0020]:  STR    Ящерица
+[0021]:  OPR    AND
+[0022]:  STR    Кот
+[0023]:  OPR    BIG
+[0024]:  STR    Собака
+[0025]:  NLN    1
+[0026]:  OPR    IF
+[0027]:  STR    Волк
+[0028]:  OPR    LESS
+[0029]:  VAL    8
+[0030]:  OPR    MUL
+[0031]:  OPR    OPEN
+[0032]:  VAL    5
+[0033]:  OPR    ADD
+[0034]:  VAL    7
+[0035]:  OPR    CLOS
+[0036]:  NLN    2
+[0037]:  OPR    WHIL
+[0038]:  STR    Слон
 [0039]:  FREE
 
 ----------Tcode Dump----------
@@ -354,41 +349,41 @@ Capacity = 80
 [0001]:  STR    БесплатныйСыр
 [0002]:  OPR    OPEN
 [0003]:  STR    Сыр
-[0004]:  OPR    COM
-[0005]:  STR    Дырки
-[0006]:  OPR    CLOS
-[0007]:  NLN    1
-[0008]:  OPR    ASS
-[0009]:  STR    Сыр
-[0010]:  VAL    4
-[0011]:  NLN    1
-[0012]:  OPR    RET
-[0013]:  STR    Сыр
-[0014]:  NLN    0
-[0015]:  OPR    IF 
-[0016]:  STR    Волк
-[0017]:  OPR    LESS
+[0004]:  OPR    CLOS
+[0005]:  NLN    1
+[0006]:  OPR    ASS
+[0007]:  STR    Сыр
+[0008]:  VAL    4
+[0009]:  NLN    1
+[0010]:  OPR    RET
+[0011]:  STR    Сыр
+[0012]:  NLN    0
+[0013]:  OPR    IF
+[0014]:  STR    Волк
+[0015]:  OPR    LESS
+[0016]:  STR    Лев
+[0017]:  OPR    OR
 [0018]:  STR    Лев
-[0019]:  OPR    OR
-[0020]:  STR    Лев
-[0021]:  OPR    BIG
-[0022]:  STR    Ящерица
-[0023]:  OPR    AND
-[0024]:  STR    Кот
-[0025]:  OPR    BIG
-[0026]:  STR    Собака
-[0027]:  NLN    1
-[0028]:  OPR    IF 
-[0029]:  STR    Волк
-[0030]:  OPR    LESS
-[0031]:  VAL    8
-[0032]:  OPR    MUL
-[0033]:  OPR    OPEN
-[0034]:  VAL    5
-[0035]:  OPR    ADD
-[0036]:  VAL    7
-[0037]:  OPR    CLOS
-[0038]:  NLN    2
+[0019]:  OPR    BIG
+[0020]:  STR    Ящерица
+[0021]:  OPR    AND
+[0022]:  STR    Кот
+[0023]:  OPR    BIG
+[0024]:  STR    Собака
+[0025]:  NLN    1
+[0026]:  OPR    IF
+[0027]:  STR    Волк
+[0028]:  OPR    LESS
+[0029]:  VAL    8
+[0030]:  OPR    MUL
+[0031]:  OPR    OPEN
+[0032]:  VAL    5
+[0033]:  OPR    ADD
+[0034]:  VAL    7
+[0035]:  OPR    CLOS
+[0036]:  NLN    2
+[0037]:  OPR    WHIL
+[0038]:  STR    Слон
 [0039]:  FREE
 [0040]:  FREE
 [0041]:  FREE
@@ -433,13 +428,6 @@ Capacity = 80
 
 ----------Tcode Dump----------
 
-line in readVal: Слон сильнее Лошадь
-			Запомните твари: Волк 5
-	Но хотя бы не я:
-		Запомните твари: Тигр БесплатныйСыр(9, 3)
-	Запомните твари: Волк Овца
-Запомните твари: Ага Тигр end.
-num read sym: 0
 line in readVal: Лошадь
 			Запомните твари: Волк 5
 	Но хотя бы не я:
@@ -489,75 +477,75 @@ num read sym: 0
 
 ++++++++++Tcode Dump++++++++++
 
-Size     = 66
+Size     = 64
 Capacity = 80
 
 [0000]:  OPR    TYPE
 [0001]:  STR    БесплатныйСыр
 [0002]:  OPR    OPEN
 [0003]:  STR    Сыр
-[0004]:  OPR    COM
-[0005]:  STR    Дырки
-[0006]:  OPR    CLOS
-[0007]:  NLN    1
-[0008]:  OPR    ASS
-[0009]:  STR    Сыр
-[0010]:  VAL    4
-[0011]:  NLN    1
-[0012]:  OPR    RET
-[0013]:  STR    Сыр
-[0014]:  NLN    0
-[0015]:  OPR    IF 
-[0016]:  STR    Волк
-[0017]:  OPR    LESS
+[0004]:  OPR    CLOS
+[0005]:  NLN    1
+[0006]:  OPR    ASS
+[0007]:  STR    Сыр
+[0008]:  VAL    4
+[0009]:  NLN    1
+[0010]:  OPR    RET
+[0011]:  STR    Сыр
+[0012]:  NLN    0
+[0013]:  OPR    IF
+[0014]:  STR    Волк
+[0015]:  OPR    LESS
+[0016]:  STR    Лев
+[0017]:  OPR    OR
 [0018]:  STR    Лев
-[0019]:  OPR    OR
-[0020]:  STR    Лев
-[0021]:  OPR    BIG
-[0022]:  STR    Ящерица
-[0023]:  OPR    AND
-[0024]:  STR    Кот
-[0025]:  OPR    BIG
-[0026]:  STR    Собака
-[0027]:  NLN    1
-[0028]:  OPR    IF 
-[0029]:  STR    Волк
-[0030]:  OPR    LESS
-[0031]:  VAL    8
-[0032]:  OPR    MUL
-[0033]:  OPR    OPEN
-[0034]:  VAL    5
-[0035]:  OPR    ADD
-[0036]:  VAL    7
-[0037]:  OPR    CLOS
-[0038]:  NLN    2
-[0039]:  OPR    WHIL
-[0040]:  STR    Слон
-[0041]:  OPR    BIG
-[0042]:  STR    Лошадь
-[0043]:  NLN    3
-[0044]:  OPR    ASS
-[0045]:  STR    Волк
-[0046]:  VAL    5
-[0047]:  NLN    1
-[0048]:  OPR    ELSE
-[0049]:  NLN    2
-[0050]:  OPR    ASS
-[0051]:  STR    Тигр
-[0052]:  STR    БесплатныйСыр
-[0053]:  OPR    OPEN
-[0054]:  VAL    9
-[0055]:  OPR    COM
-[0056]:  VAL    3
-[0057]:  OPR    CLOS
-[0058]:  NLN    1
-[0059]:  OPR    ASS
-[0060]:  STR    Волк
-[0061]:  STR    Овца
-[0062]:  NLN    0
-[0063]:  OPR    ASS
-[0064]:  STR    Ага
-[0065]:  STR    Тигр
+[0019]:  OPR    BIG
+[0020]:  STR    Ящерица
+[0021]:  OPR    AND
+[0022]:  STR    Кот
+[0023]:  OPR    BIG
+[0024]:  STR    Собака
+[0025]:  NLN    1
+[0026]:  OPR    IF
+[0027]:  STR    Волк
+[0028]:  OPR    LESS
+[0029]:  VAL    8
+[0030]:  OPR    MUL
+[0031]:  OPR    OPEN
+[0032]:  VAL    5
+[0033]:  OPR    ADD
+[0034]:  VAL    7
+[0035]:  OPR    CLOS
+[0036]:  NLN    2
+[0037]:  OPR    WHIL
+[0038]:  STR    Слон
+[0039]:  OPR    BIG
+[0040]:  STR    Лошадь
+[0041]:  NLN    3
+[0042]:  OPR    ASS
+[0043]:  STR    Волк
+[0044]:  VAL    5
+[0045]:  NLN    1
+[0046]:  OPR    ELSE
+[0047]:  NLN    2
+[0048]:  OPR    ASS
+[0049]:  STR    Тигр
+[0050]:  STR    БесплатныйСыр
+[0051]:  OPR    OPEN
+[0052]:  VAL    9
+[0053]:  OPR    COM
+[0054]:  VAL    3
+[0055]:  OPR    CLOS
+[0056]:  NLN    1
+[0057]:  OPR    ASS
+[0058]:  STR    Волк
+[0059]:  STR    Овца
+[0060]:  NLN    0
+[0061]:  OPR    ASS
+[0062]:  STR    Ага
+[0063]:  STR    Тигр
+[0064]:  FREE
+[0065]:  FREE
 [0066]:  FREE
 [0067]:  FREE
 [0068]:  FREE
@@ -580,14 +568,12 @@ start CodeBlock
 try to find open brace in ip: 2
 start GetDefParams
 start GetVariable: ip=3
-first var in param: 0000026d5ac71ae0
+first var in param: 0000012bb2e539b0
 before cycle in GetDefParam
-iteration in CodeBlock
-start GetVariable: ip=5
-end iteration in GetDefParams
-ret from GetParams, ip: 6
-try to find closing brace in ip: 6
-start NewLine: ip: 7, tcode->Size: 66
+ret from GetParams, ip: 4
+try to find closing brace in ip: 4
+start NewLine: ip: 5, tcode->Size: 64
+new line found (curr_line): 2
 NLN: 1, curr level: 0
 start CodeBlock
 returning GetCall in GetVoid
@@ -597,7 +583,7 @@ Returning GetWhile instead of RET
 returning GetAss in GetWhile
 returning GetAss in GetIf
 start GetAss
-start GetVariable: ip=9
+start GetVariable: ip=7
 got variable in GetAss()
 start GetE()
 start GetT()
@@ -606,9 +592,10 @@ start GetP()
 content of l_node: Сыр
 finish GetAss()
 finish GetTrunkBranch()
-block root: 0000026d5ac77ce0
+block root: 0000012bb2e53b40
 before cycle in CodeBlock
-start NewLine: ip: 11, tcode->Size: 66
+start NewLine: ip: 9, tcode->Size: 64
+new line found (curr_line): 3
 NLN: 1, curr level: 1
 iteration in CodeBlock
 returning GetCall in GetVoid
@@ -621,19 +608,21 @@ start GetP()
 got expression in GetRet()
 finish GetAss()
 finish GetTrunkBranch()
-found action: 0000026d5ac77dd0, type: STM
-block tail: 0000026d5ac77ce0
+found action: 0000012bb2e53c30, type: STM
+block tail: 0000012bb2e53b40
 end iteration
 curr_level: 1
-start NewLine: ip: 14, tcode->Size: 66
+start NewLine: ip: 12, tcode->Size: 64
+new line found (curr_line): 4
 NLN: 0, curr level: 1
 level-: 0
 NLN: 0
-block root: 0000026d5ac77ce0
+block root: 0000012bb2e53b40
 finish GetTrunkBranch()
-block root: 0000026d5ac77e20
+block root: 0000012bb2e53c80
 before cycle in CodeBlock
-start NewLine: ip: 14, tcode->Size: 66
+start NewLine: ip: 12, tcode->Size: 64
+new line found (curr_line): 4
 NLN: 0, curr level: 0
 iteration in CodeBlock
 returning GetCall in GetVoid
@@ -668,7 +657,8 @@ start GetE()
 start GetT()
 start GetDeg()
 start GetP()
-start NewLine: ip: 27, tcode->Size: 66
+start NewLine: ip: 25, tcode->Size: 64
+new line found (curr_line): 5
 NLN: 1, curr level: 0
 start CodeBlock
 returning GetCall in GetVoid
@@ -694,7 +684,8 @@ start GetP()
 start GetT()
 start GetDeg()
 start GetP()
-start NewLine: ip: 38, tcode->Size: 66
+start NewLine: ip: 36, tcode->Size: 64
+new line found (curr_line): 6
 NLN: 2, curr level: 1
 start CodeBlock
 returning GetCall in GetVoid
@@ -710,7 +701,8 @@ start GetE()
 start GetT()
 start GetDeg()
 start GetP()
-start NewLine: ip: 43, tcode->Size: 66
+start NewLine: ip: 41, tcode->Size: 64
+new line found (curr_line): 7
 NLN: 3, curr level: 2
 start CodeBlock
 returning GetCall in GetVoid
@@ -720,7 +712,7 @@ Returning GetWhile instead of RET
 returning GetAss in GetWhile
 returning GetAss in GetIf
 start GetAss
-start GetVariable: ip=45
+start GetVariable: ip=43
 got variable in GetAss()
 start GetE()
 start GetT()
@@ -729,25 +721,29 @@ start GetP()
 content of l_node: Волк
 finish GetAss()
 finish GetTrunkBranch()
-block root: 0000026d5ac78ae0
+block root: 0000012bb169a8f0
 before cycle in CodeBlock
-start NewLine: ip: 47, tcode->Size: 66
+start NewLine: ip: 45, tcode->Size: 64
+new line found (curr_line): 8
 NLN: 1, curr level: 3
 level-: 2
 NLN: 1
-block root: 0000026d5ac78ae0
+block root: 0000012bb169a8f0
 content of l_node in GetWhile: BIG
 finish GetTrunkBranch()
-block root: 0000026d5ac78900
+block root: 0000012bb169b0c0
 before cycle in CodeBlock
-start NewLine: ip: 47, tcode->Size: 66
+start NewLine: ip: 45, tcode->Size: 64
+new line found (curr_line): 8
 NLN: 1, curr level: 2
 level-: 1
 NLN: 1
-block root: 0000026d5ac78900
-start NewLine: ip: 47, tcode->Size: 66
+block root: 0000012bb169b0c0
+start NewLine: ip: 45, tcode->Size: 64
+new line found (curr_line): 8
 NLN: 1, curr level: 1
-start NewLine: ip: 49, tcode->Size: 66
+start NewLine: ip: 47, tcode->Size: 64
+new line found (curr_line): 9
 NLN: 2, curr level: 1
 start CodeBlock
 returning GetCall in GetVoid
@@ -757,19 +753,19 @@ Returning GetWhile instead of RET
 returning GetAss in GetWhile
 returning GetAss in GetIf
 start GetAss
-start GetVariable: ip=51
+start GetVariable: ip=49
 got variable in GetAss()
 start GetE()
 start GetT()
 start GetDeg()
 start GetP()
-try to find open brace in ip: 53
+try to find open brace in ip: 51
 start GetDefParams
 start GetE()
 start GetT()
 start GetDeg()
 start GetP()
-first var in param: 0000026d5ac78db0
+first var in param: 0000012bb169a940
 before cycle in GetDefParam
 iteration in CodeBlock
 start GetE()
@@ -777,23 +773,25 @@ start GetT()
 start GetDeg()
 start GetP()
 end iteration in GetDefParams
-ret from GetParams, ip: 57
-try to find closing brace in ip: 57
+ret from GetParams, ip: 55
+try to find closing brace in ip: 55
 content of l_node: Тигр
 finish GetAss()
 finish GetTrunkBranch()
-block root: 0000026d5ac78ea0
+block root: 0000012bb169adf0
 before cycle in CodeBlock
-start NewLine: ip: 58, tcode->Size: 66
+start NewLine: ip: 56, tcode->Size: 64
+new line found (curr_line): 10
 NLN: 1, curr level: 2
 level-: 1
 NLN: 1
-block root: 0000026d5ac78ea0
+block root: 0000012bb169adf0
 content of l_node in GetIf: LESS
 finish GetTrunkBranch()
-block root: 0000026d5ac78c20
+block root: 0000012bb169ad50
 before cycle in CodeBlock
-start NewLine: ip: 58, tcode->Size: 66
+start NewLine: ip: 56, tcode->Size: 64
+new line found (curr_line): 10
 NLN: 1, curr level: 1
 iteration in CodeBlock
 returning GetCall in GetVoid
@@ -803,7 +801,7 @@ Returning GetWhile instead of RET
 returning GetAss in GetWhile
 returning GetAss in GetIf
 start GetAss
-start GetVariable: ip=60
+start GetVariable: ip=58
 got variable in GetAss()
 start GetE()
 start GetT()
@@ -812,25 +810,28 @@ start GetP()
 content of l_node: Волк
 finish GetAss()
 finish GetTrunkBranch()
-found action: 0000026d5ac78950, type: STM
-block tail: 0000026d5ac78c20
+found action: 0000012bb169ac60, type: STM
+block tail: 0000012bb169ad50
 end iteration
 curr_level: 1
-start NewLine: ip: 62, tcode->Size: 66
+start NewLine: ip: 60, tcode->Size: 64
+new line found (curr_line): 11
 NLN: 0, curr level: 1
 level-: 0
 NLN: 0
-block root: 0000026d5ac78c20
-start NewLine: ip: 62, tcode->Size: 66
+block root: 0000012bb169ad50
+start NewLine: ip: 60, tcode->Size: 64
+new line found (curr_line): 11
 NLN: 0, curr level: 0
 returning Empty Block in GetElse
 content of l_node in GetIf: OR
 finish GetTrunkBranch()
-found action: 0000026d5ac786d0, type: STM
-block tail: 0000026d5ac77e20
+found action: 0000012bb169aee0, type: STM
+block tail: 0000012bb2e53c80
 end iteration
 curr_level: 0
-start NewLine: ip: 62, tcode->Size: 66
+start NewLine: ip: 60, tcode->Size: 64
+new line found (curr_line): 12
 NLN: 0, curr level: 0
 iteration in CodeBlock
 returning GetCall in GetVoid
@@ -840,7 +841,7 @@ Returning GetWhile instead of RET
 returning GetAss in GetWhile
 returning GetAss in GetIf
 start GetAss
-start GetVariable: ip=64
+start GetVariable: ip=62
 got variable in GetAss()
 start GetE()
 start GetT()
@@ -849,16 +850,16 @@ start GetP()
 content of l_node: Ага
 finish GetAss()
 finish GetTrunkBranch()
-found action: 0000026d5ac789f0, type: STM
-block tail: 0000026d5ac786d0
+found action: 0000012bb169b1b0, type: STM
+block tail: 0000012bb169aee0
 end iteration
 curr_level: 0
 level-: -1
 NLN: -253499182
-block root: 0000026d5ac77e20
-tree pointer in HTMLDump: 00007ff6b2517080
+block root: 0000012bb2e53c80
+tree pointer in HTMLDump: 00007ff63309c7a0
 picture name: graphCode0.png
-tree pointer: 00007ff6b2517080
+tree pointer: 00007ff63309c7a0
 start making console cmd
 console cmd: dot -T png -o graphCode0.png dump.dot
 tree made, start writing
@@ -866,8 +867,6 @@ Start writing tree
 start writing node: OP
 start writing node: OP
 start writing node: FUNC
-start writing node: OP
-start writing node: VAR
 start writing node: OP
 start writing node: VAR
 start writing node: OP
@@ -929,6 +928,540 @@ start writing node: OP
 start writing node: VAR
 start writing node: VAR
 Finish writing tree
+Start scanning tree file
+
+
+start scanning node
+read line 1: STM
+has sons
+read line 2: STM
+new op is ready
+
+
+start scanning node
+read line 1: FUNC
+has sons
+read line 2: FUNC
+new op is ready
+
+
+start scanning node
+read line 1: "БесплатныйСыр"
+has sons
+read line 2: "БесплатныйСыр"
+num read sym before val = 0
+num read sym in val = 0
+
+
+start scanning node
+read line 1: PAR
+has sons
+read line 2: PAR
+new op is ready
+
+
+start scanning node
+read line 1: "Сыр"
+read line 2: "Сыр"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: TYPE
+has sons
+read line 2: TYPE
+new op is ready
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: STM
+has sons
+read line 2: STM
+new op is ready
+
+
+start scanning node
+read line 1: ASS
+has sons
+read line 2: ASS
+new op is ready
+
+
+start scanning node
+read line 1: "Сыр"
+read line 2: "Сыр"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: 4
+read line 2: 4
+num read sym before val = 1
+num read sym in val = 1
+
+
+start scanning node
+read line 1: STM
+has sons
+read line 2: STM
+new op is ready
+
+
+start scanning node
+read line 1: RET
+has sons
+read line 2: RET
+new op is ready
+
+
+start scanning node
+read line 1: "Сыр"
+read line 2: "Сыр"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: STM
+has sons
+read line 2: STM
+new op is ready
+
+
+start scanning node
+read line 1: IF
+has sons
+read line 2: IF
+new op is ready
+
+
+start scanning node
+read line 1: OR
+has sons
+read line 2: OR
+new op is ready
+
+
+start scanning node
+read line 1: LESS
+has sons
+read line 2: LESS
+new op is ready
+
+
+start scanning node
+read line 1: "Волк"
+read line 2: "Волк"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: "Лев"
+read line 2: "Лев"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: AND
+has sons
+read line 2: AND
+new op is ready
+
+
+start scanning node
+read line 1: BIG
+has sons
+read line 2: BIG
+new op is ready
+
+
+start scanning node
+read line 1: "Лев"
+read line 2: "Лев"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: "Ящерица"
+read line 2: "Ящерица"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: BIG
+has sons
+read line 2: BIG
+new op is ready
+
+
+start scanning node
+read line 1: "Кот"
+read line 2: "Кот"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: "Собака"
+read line 2: "Собака"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: STM
+has sons
+read line 2: STM
+new op is ready
+
+
+start scanning node
+read line 1: IF
+has sons
+read line 2: IF
+new op is ready
+
+
+start scanning node
+read line 1: LESS
+has sons
+read line 2: LESS
+new op is ready
+
+
+start scanning node
+read line 1: "Волк"
+read line 2: "Волк"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: MUL
+has sons
+read line 2: MUL
+new op is ready
+
+
+start scanning node
+read line 1: 8
+read line 2: 8
+num read sym before val = 1
+num read sym in val = 1
+
+
+start scanning node
+read line 1: ADD
+has sons
+read line 2: ADD
+new op is ready
+
+
+start scanning node
+read line 1: 5
+read line 2: 5
+num read sym before val = 1
+num read sym in val = 1
+
+
+start scanning node
+read line 1: 7
+read line 2: 7
+num read sym before val = 1
+num read sym in val = 1
+
+
+start scanning node
+read line 1: ELSE
+has sons
+read line 2: ELSE
+new op is ready
+
+
+start scanning node
+read line 1: STM
+has sons
+read line 2: STM
+new op is ready
+
+
+start scanning node
+read line 1: WHIL
+has sons
+read line 2: WHIL
+new op is ready
+
+
+start scanning node
+read line 1: BIG
+has sons
+read line 2: BIG
+new op is ready
+
+
+start scanning node
+read line 1: "Слон"
+read line 2: "Слон"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: "Лошадь"
+read line 2: "Лошадь"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: STM
+has sons
+read line 2: STM
+new op is ready
+
+
+start scanning node
+read line 1: ASS
+has sons
+read line 2: ASS
+new op is ready
+
+
+start scanning node
+read line 1: "Волк"
+read line 2: "Волк"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: 5
+read line 2: 5
+num read sym before val = 1
+num read sym in val = 1
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: STM
+has sons
+read line 2: STM
+new op is ready
+
+
+start scanning node
+read line 1: ASS
+has sons
+read line 2: ASS
+new op is ready
+
+
+start scanning node
+read line 1: "Тигр"
+read line 2: "Тигр"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: CALL
+has sons
+read line 2: CALL
+new op is ready
+
+
+start scanning node
+read line 1: "БесплатныйСыр"
+has sons
+read line 2: "БесплатныйСыр"
+num read sym before val = 0
+num read sym in val = 0
+
+
+start scanning node
+read line 1: PAR
+has sons
+read line 2: PAR
+new op is ready
+
+
+start scanning node
+read line 1: 9
+read line 2: 9
+num read sym before val = 1
+num read sym in val = 1
+
+
+start scanning node
+read line 1: PAR
+has sons
+read line 2: PAR
+new op is ready
+
+
+start scanning node
+read line 1: 3
+read line 2: 3
+num read sym before val = 1
+num read sym in val = 1
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: NIL
+has sons
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: STM
+has sons
+read line 2: STM
+new op is ready
+
+
+start scanning node
+read line 1: ASS
+has sons
+read line 2: ASS
+new op is ready
+
+
+start scanning node
+read line 1: "Волк"
+read line 2: "Волк"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: "Овца"
+read line 2: "Овца"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+
+
+start scanning node
+read line 1: STM
+has sons
+read line 2: STM
+new op is ready
+
+
+start scanning node
+read line 1: ASS
+has sons
+read line 2: ASS
+new op is ready
+
+
+start scanning node
+read line 1: "Ага"
+read line 2: "Ага"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: "Тигр"
+read line 2: "Тигр"
+num read sym before val = 1
+num read sym in val = 0
+
+
+start scanning node
+read line 1: NIL
+read line 2: NIL
+new op is ready
+Finish scanning tree file
+tree pointer in HTMLDump: 0000000510bff650
+picture name: graphCode1.png
+tree pointer: 0000000510bff650
+start making console cmd
+console cmd: dot -T png -o graphCode1.png dump.dot
 
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 --------------------Finish program--------------------

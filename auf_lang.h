@@ -196,6 +196,10 @@
     NoBraceInOrdTrigOp(str);                                                \
 }
 
+#define CheckStrFunc(op)                                                    \
+    op_v = op;                                                              \
+    if (!strcmp((const char*)&op_v, str)) return op;
+
 //finish DSL
 
 const size_t MAX_LEN_VAR_NAME   = 30;
@@ -212,14 +216,15 @@ enum ERRCODES
      SEGFAULT           , // 1
      ZOMBIE             , // 2
      NULLPTR            , // 3
-     SIZEPOISONED       , // 4
-     NEGCAP             , // 5
-     DEBUGINFOERROR     , // 6
-     REALLOCERROR       , // 7
-     STACKOVERFLOW      , // 8
-     FREE_ERROR         , // 9
-     CHAINERROR         , // 10
-     CONSTR_ERROR         // 11
+     NEWLINE_ERROR      , // 4        //
+     GETASS_ERROR       , // 5
+     VARIABLE_ERROR     , // 7
+     VARFUNC_ERROR      , // 8
+     FUNCNAME_ERROR     , // 9
+     OPENBRACE_ERROR    , // 10
+     CLOSEBRACE_ERROR   , // 11
+     VARAFTERCOMMA_ERROR, // 12
+     READNODE_ERROR     , // 13
 };
 
 enum ARYTHMETIC_OPERATIONS

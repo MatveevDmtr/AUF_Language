@@ -3,12 +3,6 @@
 
 #include "auf_lang.h"
 
-typedef struct __table_var
-{
-    char**  Table;
-    size_t  Size;
-} tvar_t;
-
 union tokenv_t
 {
     char     str_v[MAX_LEN_TOKEN_STR];
@@ -42,7 +36,7 @@ enum COMMANDS
 {
     OP_STM     = 'MTS',
     OP_ASS     = 'SSA',
-    OP_IF      = ' FI',
+    OP_IF      = 'FI',
     OP_ELIF    = 'FILE',
     OP_ELSE    = 'ESLE',
     OP_WHILE   = 'LIHW',
