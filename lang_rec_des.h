@@ -35,6 +35,7 @@ enum TOKEN_TYPES
 enum COMMANDS
 {
     OP_STM     = 'MTS',
+    OP_NEWVAR  = 'RAV',
     OP_ASS     = 'SSA',
     OP_IF      = 'FI',
     OP_ELIF    = 'FILE',
@@ -52,11 +53,12 @@ enum COMMANDS
     OP_AND     = 'DNA',
     OP_OR      = 'RO' ,
     OP_INPUT   = 'PNI',
+    OP_OUTPUT  = 'TUO',
     OP_COMMA   = 'MOC',
     OP_PARAM   = 'RAP',
     OP_FUNC    = 'CNUF',
     OP_CALL    = 'LLAC',
-    OP_NIL    = 'LIN',
+    OP_NIL     = 'LIN',
 };
 
 enum BRACE
@@ -90,6 +92,8 @@ int TcodeCtor();
 int TcodeRecalloc();
 
 int TcodeDump();
+
+int ReadNewLine(const char** ptr_line);
 
 int ReadVar(const char** ptr_line);
 
@@ -131,6 +135,12 @@ elem_s* GetFuncDef(size_t op_ret, elem_s* (FuncParam)());
 
 elem_s* GetDefParams(elem_s* (FuncParam)());
 
+elem_s* GetInput();
+
+elem_s* GetOutput();
+
+elem_s* GetNewVar();
+
 elem_s* GetWhile();
 
 elem_s* GetIf();
@@ -142,6 +152,10 @@ elem_s* GetAss();
 elem_s* GetBoolExpr();
 
 elem_s* GetCompare();
+
+elem_s* GetECompare();
+
+elem_s* GetEqNeq();
 
 elem_s* GetAnd();
 

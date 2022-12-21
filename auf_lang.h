@@ -200,6 +200,55 @@
     op_v = op;                                                              \
     if (!strcmp((const char*)&op_v, str)) return op;
 
+#define DumpAsm(...)                                                        \
+{                                                                           \
+    fprintf(asmfile, __VA_ARGS__);                                          \
+}
+
+#define RunSons(node)                                                       \
+{                                                                           \
+    RunOp(tablevar, node->left);                                            \
+    RunOp(tablevar, node->right);                                           \
+}
+
+#define RunSonsRev(node)                                                    \
+{                                                                           \
+    RunOp(tablevar, node->right);                                           \
+    RunOp(tablevar, node->left);                                            \
+}
+
+#define WriteLabel(name, num, label)                                        \
+{                                                                           \
+    DumpAsm("\n\nname %s%d %d\n", name, num, label);                        \
+    DumpAsm("lbl %s%d\n", name, num);                                       \
+    label++;                                                                \
+}
+
+#define JumpFromCond(line)                                                  \
+{                                                                           \
+    if(node->parent->type == NODE_OP &&                                     \
+       node->parent->value.op_v == OP_IF)                                   \
+    {                                                                       \
+        DumpAsm(line);                                                      \
+        DumpAsm(" if_false%d\n\n", curr_if_lbl);                            \
+    }                                                                       \
+    else if (node->parent->type == NODE_OP &&                               \
+             node->parent->value.op_v == OP_WHILE)                          \
+    {                                                                       \
+        DumpAsm(line);                                                      \
+        DumpAsm(" end_while%d\n\n", curr_while_lbl);                        \
+    }                                                                       \
+}
+
+#define three_equals_five                                                                    \
+{                                                                                            \
+    if (node->left->type == NODE_VAL &&                                                      \
+        node->left->value.int_v == 3 &&                                                      \
+        node->right->type == NODE_VAL &&                                                     \
+        node->right->value.int_v == 5)                                                       \
+        FramedConsoleError("В дверь постучали 3=5 раз. \"PowUni\" - подумал Штирлиц");       \
+}
+
 //finish DSL
 
 const size_t MAX_LEN_VAR_NAME   = 30;
@@ -212,19 +261,22 @@ typedef int elem_t;
 
 enum ERRCODES
 {
-     OK                 , // 0
-     SEGFAULT           , // 1
-     ZOMBIE             , // 2
-     NULLPTR            , // 3
-     NEWLINE_ERROR      , // 4        //
-     GETASS_ERROR       , // 5
-     VARIABLE_ERROR     , // 7
-     VARFUNC_ERROR      , // 8
-     FUNCNAME_ERROR     , // 9
-     OPENBRACE_ERROR    , // 10
-     CLOSEBRACE_ERROR   , // 11
-     VARAFTERCOMMA_ERROR, // 12
-     READNODE_ERROR     , // 13
+     OK                  , // 0
+     SEGFAULT            , // 1
+     ZOMBIE              , // 2
+     NULLPTR             , // 3
+     NEWLINE_ERROR       , // 4        //
+     GETASS_ERROR        , // 5
+     VARIABLE_ERROR      , // 7
+     VARFUNC_ERROR       , // 8
+     FUNCNAME_ERROR      , // 9
+     OPENBRACE_ERROR     , // 10
+     CLOSEBRACE_ERROR    , // 11
+     VARAFTERCOMMA_ERROR , // 12
+     READNODE_ERROR      , // 13
+     UNDECLARED_VAR_ERROR, // 14
+     INVALID_ARG_ERROR   , // 15
+     MULT_DEF_ERROR      , // 16
 };
 
 enum ARYTHMETIC_OPERATIONS

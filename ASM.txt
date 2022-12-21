@@ -1,0 +1,42 @@
+CALL main
+
+
+name main0 0
+lbl main0
+push 7
+CALL Факториал
+HLT
+RET
+
+
+
+
+name Факториал1 1
+lbl Факториал1
+pop [15]
+push 1
+pop [16]
+push 1
+pop [17]
+
+
+name while1 2
+lbl while1
+push [17]
+push [15]
+jae end_while1
+
+push [16]
+push [17]
+pop [16]
+jump while1
+
+
+name end_while1 3
+lbl end_while1
+push [16]
+OUT
+push [16]
+RET
+
+

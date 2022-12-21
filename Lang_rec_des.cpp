@@ -128,7 +128,7 @@ int GetNewLine()
     if (ip >= tcode->Size)                  return -1;
     if (tcode->Ptr[ip].type != T_NEWLINE)
     {
-        LogError(NEWLINE_ERROR);
+        //LogError(NEWLINE_ERROR);
 
         return -1;
     }
@@ -218,6 +218,91 @@ elem_s* GetAss()
     return node_ass;
 }
 
+elem_s* GetInput()
+{
+    log("start GetInput\n");
+
+    if (tcode->Ptr[ip].type       != T_OP ||
+        tcode->Ptr[ip].value.op_v != OP_INPUT)
+    {
+        log("Returning GetOutput instead of INPUT\n");
+
+        return GetOutput();
+    }
+
+    ip++;
+
+    elem_s* node_inp = NewOp(OP_INPUT);
+
+    elem_s* l_node = GetDefParams(GetE);
+
+    log("got expression in GetRet()\n");
+
+    ConnectNodes(node_inp, l_node, LEFT);
+
+    log("finish GetAss()\n");
+
+    return node_inp;
+}
+
+elem_s* GetOutput()
+{
+    log("start GetOutput\n");
+
+    if (tcode->Ptr[ip].type       != T_OP ||
+        tcode->Ptr[ip].value.op_v != OP_OUTPUT)
+    {
+        log("Returning GetNewVar instead of OUTPUT\n");
+
+        return GetNewVar();
+    }
+
+    ip++;
+
+    elem_s* node_out = NewOp(OP_OUTPUT);
+
+    elem_s* l_node = GetDefParams(GetE);
+
+    log("got expression in GetOutput()\n");
+
+    ConnectNodes(node_out, l_node, LEFT);
+
+    log("finish GetOutput()\n");
+
+    return node_out;
+}
+
+elem_s* GetNewVar()  //testing
+{
+    log("start GetNewVar\n");
+
+    if (tcode->Ptr[ip].type       != T_OP ||
+        tcode->Ptr[ip].value.op_v != OP_NEWVAR)
+    {
+        log("Returning GetRet instead of NEWVAR\n");
+
+        return GetRet();
+    }
+
+    ip++;
+
+    elem_s* node_ass = NewOp(OP_NEWVAR);
+
+    elem_s* l_node = GetVariable();
+
+    log("got variable in GetNewVar()\n");
+
+    elem_s* r_node = GetE();
+
+    log("content of l_node: %s\n", l_node->value.str_v);
+
+    MakeSons(node_ass, l_node, r_node);
+
+    log("finish GetNewVar()\n");
+
+    return node_ass;
+}
+
 elem_s* GetRet()
 {
     log("start GetRet\n");
@@ -240,7 +325,7 @@ elem_s* GetRet()
 
     ConnectNodes(node_ret, l_node, LEFT);
 
-    log("finish GetAss()\n");
+    log("finish GetRet()\n");
 
     return node_ret;
 }
@@ -252,7 +337,17 @@ elem_s* GetBoolExpr()
 
 elem_s* GetCompare()
 {
-    RecursiveRead2Ops(OP_BIGGER, OP_LESS, GetE());
+    RecursiveRead2Ops(OP_BIGGER, OP_LESS, GetECompare());
+}
+
+elem_s* GetECompare()
+{
+    RecursiveRead2Ops(OP_NBIGGER, OP_NLESS, GetEqNeq());
+}
+
+elem_s* GetEqNeq()
+{
+    RecursiveRead2Ops(OP_EQ, OP_NEQ, GetE());
 }
 
 elem_s* GetAnd()
@@ -380,9 +475,9 @@ elem_s* GetCall()
 {
     if (!(tcode->Ptr[ip].type == T_STR))
     {
-        log("returning GetRet in GetCall\n");
+        log("returning GetInput in GetCall\n");
 
-        return GetRet();
+        return GetInput();
     }
 
     elem_s* node_call = NewOp(OP_CALL);
@@ -429,7 +524,8 @@ elem_s* GetVariable()
 
     if (tcode->Ptr[ip].type != T_STR)
     {
-        LogError(VARIABLE_ERROR);
+        if (tcode->Ptr[ip].type != T_OP || tcode->Ptr[ip].value.op_v != BR_CLOSE)
+            LogError(VARIABLE_ERROR);
 
         return NULL;
     }
@@ -890,7 +986,8 @@ void DrawNode(elem_s* node, FILE* dump_file, const char* branch_label)
     {
         case NODE_OP:
             color = "chartreuse2";
-            if (node->value.op_v == OP_STM)   color = "steelblue1";
+            if      (node->value.op_v == OP_STM)   color = "steelblue1";
+            else if (node->value.op_v == OP_NIL)   color = "lavenderblush";
             dumpline("%.4s", &node->value.op_v);
             break;
 
@@ -1035,6 +1132,18 @@ int LogCritError(int errcode, const char* func, int line)
 
         case READNODE_ERROR:
             FramedConsoleError("я скомуниздил у теб€ твою дичь, а потом не смог еЄ прочитать");
+            break;
+
+        case UNDECLARED_VAR_ERROR:
+            FramedConsoleError(" ак бы высоко ты не летал, не забывай, что ты не задекларировал переменную");
+            break;
+
+        case INVALID_ARG_ERROR:
+            FramedConsoleError("Ћетай как бабочка, жаль, что у теб€ неправильный аргумент");
+            break;
+
+        case MULT_DEF_ERROR:
+            FramedConsoleError("≈сли вы создали переменную один раз - это только первый раз. ≈сли создали ещЄ - это уже второй.");
             break;
 
         default:

@@ -52,8 +52,10 @@ const cmd_t CMD_VOID     = {.Text = "Обид не держу - держу пиво.",
                             .Len  = strlen(CMD_VOID.Text)};
 const cmd_t CMD_TYPE     = {.Text = "Любят тихо. Громко только пердят.",
                             .Len  = strlen(CMD_TYPE.Text)};
-const cmd_t CMD_INPUT    = {.Text = "Дед - это как волк, только не волк.",
+const cmd_t CMD_INPUT    = {.Text = "Дед - это как волк, только не волк:",
                             .Len  = strlen(CMD_INPUT.Text)};
+const cmd_t CMD_OUTPUT   = {.Text = "Когда волк молчит, лучше его не перебивать:",
+                            .Len  = strlen(CMD_OUTPUT.Text)};
 const cmd_t CMD_RETURN   = {.Text = "Сделал дело - дело сделано.",
                             .Len  = strlen(CMD_RETURN.Text)};
 const cmd_t CMD_OPENBR   = {.Text = "АУФ[",
@@ -182,6 +184,7 @@ token_code_t* LexTrans(const char* line)
 
     while (*line != '\0')
     {
+        if (!ReadOp(&line, &CMD_NEWVAR,   OP_NEWVAR))  continue;
         if (!ReadOp(&line, &CMD_ASSIGN,   OP_ASS))     continue;
         if (!ReadOp(&line, &CMD_IF,       OP_IF ))     continue;
         if (!ReadOp(&line, &CMD_ELSEIF,   OP_ELIF))    continue;
@@ -190,6 +193,7 @@ token_code_t* LexTrans(const char* line)
         if (!ReadOp(&line, &CMD_VOID,     OP_VOID))    continue;
         if (!ReadOp(&line, &CMD_TYPE,     OP_TYPE))    continue;
         if (!ReadOp(&line, &CMD_INPUT,    OP_INPUT))   continue;
+        if (!ReadOp(&line, &CMD_OUTPUT,   OP_OUTPUT))  continue;
         if (!ReadOp(&line, &CMD_RETURN,   OP_RET))     continue;
 
         if (!ReadOp(&line, &CMD_OPENBR,   BR_OPEN))    continue;
@@ -217,6 +221,12 @@ token_code_t* LexTrans(const char* line)
 
         if (!ReadVal(&line))                           continue;
         if (!ReadVar(&line))                           continue;
+
+        if (*line == '\n')
+        {
+            ReadNewLine(&line);
+            continue;
+        }
 
         printf("Nothing can be read. Exit\n");
 
@@ -267,7 +277,7 @@ int ReadVar(const char** ptr_line)
 
     char var[MAX_LEN_VAR_NAME] = "";
 
-    sscanf(*ptr_line, "%[а-яА-Я_]%n", var, &num_read_sym);
+    sscanf(*ptr_line, "%[a-zA-Zа-яА-Я_]%n", var, &num_read_sym);
 
     if (!num_read_sym)
     {
@@ -278,6 +288,10 @@ int ReadVar(const char** ptr_line)
     NewStr(var);
 
     *ptr_line += strlen(var);
+
+    SkipSpaces(ptr_line);
+
+    log("next sym: %d\n", **ptr_line);
 
     return 0;
 }
@@ -303,6 +317,8 @@ int ReadVal(const char** ptr_line)
     NewVal(val);
 
     *ptr_line += num_read_sym;
+
+    SkipSpaces(ptr_line);
 
     return 0;
 }
@@ -335,12 +351,14 @@ int ReadOp(const char** ptr_line, const cmd_t* cmd_text, size_t cmd_code)
 
     *ptr_line += cmd_text->Len;
 
+    SkipSpaces(ptr_line);
+
     return 0;
 }
 
 int SkipSpaces(const char** ptr_line)
 {
-    while (**ptr_line == ' ' || **ptr_line == '\n' || **ptr_line == '\0')
+    while (**ptr_line == ' ' || **ptr_line == '\n' || **ptr_line == '\0' || **ptr_line == '\t')
     {
         if (**ptr_line == '\n')
         {
