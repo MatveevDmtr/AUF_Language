@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+#pragma GCC diagnostic ignored "-Wmultichar"
+
 #include "D:\\Programming\\C\\Ded_course_1_sem\\Processor_v4\\logging.h"
 
 #define StructTreeInit(name)                              \
@@ -13,7 +15,7 @@
                            __LINE__);
 
 
-//#define allocate_array(type, num_elems)                             \
+/*#define allocate_array(type, num_elems)                             \
 ({                                                                  \
     type* location__ = (type*) calloc (num_elems, sizeof (type));   \
     log ("Type_calloc: %s\n", #type);                               \
@@ -21,7 +23,7 @@
     Assert(location__ == NULL);                                     \
     log("Calloc returned: %p\n", location__);                       \
     location__;                                                     \
-})
+})*/
 
 #define allocate_array(type, num_elems)                             \
 ({                                                                  \
@@ -184,12 +186,12 @@
     TexPrint("}");                                            \
 }
 
-//#define TexTrigOp(str)                                                    \
+/*#define TexTrigOp(str)                                                    \
 {                                                                           \
     if (node->parent->type == NODE_OP &&                                    \
         node->parent->value.op_val == OP_DEG) {BraceInOrdTrigOp(str);}      \
     else                                      {NoBraceInOrdTrigOp(str);}    \
-}
+}*/
 
 #define TexTrigOp(str)                                                      \
 {                                                                           \
@@ -286,6 +288,7 @@ enum ARYTHMETIC_OPERATIONS
     OP_MUL    = 'LUM',
     OP_DIV    = 'VID',
     OP_DEG    = 'GED',
+    OP_SQRT   = 'TRQS',
     OP_SIN    = 'NIS',
     OP_COS    = 'SOC',
     OP_TG     = 'GT' ,

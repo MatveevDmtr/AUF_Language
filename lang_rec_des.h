@@ -1,6 +1,8 @@
 #ifndef LANG_REC_DES_H_INCLUDED
 #define LANG_REC_DES_H_INCLUDED
 
+#pragma GCC diagnostic ignored "-Wmultichar"
+
 #include "auf_lang.h"
 
 union tokenv_t

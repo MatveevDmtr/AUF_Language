@@ -272,7 +272,7 @@ elem_s* GetOutput()
     return node_out;
 }
 
-elem_s* GetNewVar()  //testing
+elem_s* GetNewVar()
 {
     log("start GetNewVar\n");
 
@@ -578,26 +578,6 @@ int ConnectNodes(elem_s* parent, elem_s* son, size_t num_son)
 
     return 0;
 }
-//Differ
-/*int GetG(tree_t* tree, const char* str)
-{
-    s = str;
-
-    elem_s* root = GetE();
-
-    if (ip == tcode->Size)
-    {
-        printf("The end\n");
-    }
-    else
-    {
-        printf("Syntax error: %c\n", *s);
-    }
-
-    tree->Ptr = root;
-
-    return 0;
-}*/
 
 elem_s* GetN()
 {
@@ -797,10 +777,6 @@ elem_s* GetDefParams(elem_s* (FuncParam)())
     return root_param;
 }
 
-/*elem_s* GetParam()
-{
-}*/
-
 elem_s* GetDeg()
 {
     log("start GetDeg()\n");
@@ -809,12 +785,34 @@ elem_s* GetDeg()
 
     if (tcode->Ptr[ip].type == T_OP && tcode->Ptr[ip].value.op_v == OP_DEG)
     {
+        ip++;
+
         elem_s* r_node = GetP();
         elem_s* l_node = op_node;
 
         op_node = NewOp(OP_DEG);
 
         MakeSons(op_node, l_node, r_node);
+    }
+
+    return op_node;
+}
+
+elem_s* GetSqrt()
+{
+    log("start GetSqrt()\n");
+
+    elem_s* op_node = GetDeg();
+
+    if (tcode->Ptr[ip].type == T_OP && tcode->Ptr[ip].value.op_v == OP_SQRT)
+    {
+        ip++;
+
+        elem_s* r_node = GetDeg();
+
+        op_node = NewOp(OP_SQRT);
+
+        ConnectNodes(op_node, r_node, RIGHT);
     }
 
     return op_node;
@@ -856,11 +854,11 @@ elem_s* GetT()
 {
     log("start GetT()\n");
 
-    elem_s* op_node = GetDeg();
+    elem_s* op_node = GetSqrt();
 
     if (tcode->Ptr[ip].type != T_OP)    return op_node;
 
-    if (tcode->Ptr[ip].value.op_v == OP_MUL ||
+    while (tcode->Ptr[ip].value.op_v == OP_MUL ||
         tcode->Ptr[ip].value.op_v == OP_DIV)
     {
         ip++;
@@ -876,7 +874,7 @@ elem_s* GetT()
             op_node = NewOp(OP_DIV);
         }
 
-        elem_s* r_node = GetDeg();
+        elem_s* r_node = GetSqrt();
 
         MakeSons(op_node, l_node, r_node);
     }
@@ -970,11 +968,6 @@ int HTMLDump(const tree_t* tree, const char* occasion)
     fclose(html_file);
 }
 
-/*int ChangeEncoding(char* text)
-{
-    Encoding utf8 = Encoding.GetEncoding("utf-8");
-    Encoding win1251 = Encoding.GetEncoding("windows-1251");
-}*/
 
 void DrawNode(elem_s* node, FILE* dump_file, const char* branch_label)
 {

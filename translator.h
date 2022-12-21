@@ -1,3 +1,6 @@
+const size_t MAX_NUM_PARAMS = 20;
+
+
 int ScanTree(tree_t* tree);
 
 elem_s* ScanNode(tree_t* tree, elem_s* parent, FILE* treefile, size_t num_son);
@@ -46,3 +49,5 @@ int AsmOutput(tabvar_t* tablevar, elem_s* node_inp);
 int AsmParams(tabvar_t* tablevar, elem_s* node);
 
 int DumpTableVar(tabvar_t* tablevar);
+
+int TableVarRecalloc(tabvar_t* tablevar);

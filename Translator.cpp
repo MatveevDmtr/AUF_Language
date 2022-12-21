@@ -39,7 +39,7 @@ enum PROCESSOR_CMDS
     CMD_JAE  = 'EAJ',
     CMD_JE   = 'EJ',
     CMD_JNE  = 'ENJ',
-    //CMD_JB   = 'BJ',
+    CMD_SQRT = 'TRQS',
 };
 
 int main()
@@ -217,6 +217,7 @@ size_t IdentifyOp(char* str)
     CheckStrFunc(OP_MUL);
     CheckStrFunc(OP_DIV);
     CheckStrFunc(OP_DEG);
+    CheckStrFunc(OP_SQRT);
     CheckStrFunc(OP_SIN);
     CheckStrFunc(OP_COS);
     CheckStrFunc(OP_TG);
@@ -243,8 +244,6 @@ int NewNameSpace(elem_s* node, elem_s* node_func)
     ram_free -= tablevar.Capacity; // before return
 
     free(tablevar.Table);
-
-    //if (node_func) log("node_func: %.4s, %.4s\n", &node_func->type, &node_func->value.op_v);
 
     if (node_func && !strcmp(node_func->parent->value.str_v, "main"))    WriteCmdAsm(CMD_HLT);
 
@@ -301,6 +300,8 @@ int RunOp(tabvar_t* tablevar, elem_s* node)
     static int curr_if_lbl    = 0;
     static int curr_while_lbl = 0;
 
+    int label_remember = 0;
+
     DumpTableVar(tablevar);
 
     if (node->type == NODE_FUNC)
@@ -329,6 +330,7 @@ int RunOp(tabvar_t* tablevar, elem_s* node)
         return 0;
     }
 
+    log("Start Run Operation %.4s\n\n", &node->value.op_v);
     switch(node->value.op_v)
     {
         case OP_STM:
@@ -361,37 +363,37 @@ int RunOp(tabvar_t* tablevar, elem_s* node)
             break;
 
         case OP_ELSE:
-            //label_num++;
+            label_remember = curr_if_lbl;
+
+            curr_if_lbl++;
 
             RunOp(tablevar, node->left);
 
-            DumpAsm("jump end_if%d\n", curr_if_lbl);
+            DumpAsm("jump end_if%d\n", label_remember);
 
-            WriteLabel("if_false", curr_if_lbl, label_num);
+            WriteLabel("if_false", label_remember, label_num);
 
             RunOp(tablevar, node->right);
 
-            WriteLabel("end_if", curr_if_lbl, label_num);
-
-            curr_if_lbl++;
+            WriteLabel("end_if", label_remember, label_num);
 
             break;
 
         case OP_WHILE:
 
-            //label_num++;
+            label_remember = curr_while_lbl;
 
-            WriteLabel("while", curr_while_lbl, label_num);
+            WriteLabel("while", label_remember, label_num);
 
             RunOp(tablevar, node->left);
 
+            curr_while_lbl++;
+
             RunOp(tablevar, node->right);
 
-            DumpAsm("jump while%d\n", curr_while_lbl);
+            DumpAsm("jump while%d\n", label_remember);
 
-            WriteLabel("end_while", curr_while_lbl, label_num);
-
-            curr_while_lbl++;
+            WriteLabel("end_while", label_remember, label_num);
 
             break;
 
@@ -408,22 +410,22 @@ int RunOp(tabvar_t* tablevar, elem_s* node)
 
         case OP_BIGGER:
             RunSonsRev(node);
-            JumpFromCond("jbe");
+            JumpFromCond("jae");
             break;
 
         case OP_LESS:
             RunSonsRev(node);
-            JumpFromCond("jae");
+            JumpFromCond("jbe");
             break;
 
         case OP_NBIGGER:
             RunSonsRev(node);
-            JumpFromCond("jb");
+            JumpFromCond("ja");
             break;
 
         case OP_NLESS:
             RunSonsRev(node);
-            JumpFromCond("ja");
+            JumpFromCond("jb");
             break;
 
         case OP_EQ:
@@ -462,6 +464,11 @@ int RunOp(tabvar_t* tablevar, elem_s* node)
         case OP_DEG:
             RunSons(node);
             WriteCmdAsm(CMD_DEG);
+            break;
+
+        case OP_SQRT:
+            RunOp(tablevar, node->right);
+            WriteCmdAsm(CMD_SQRT);
             break;
 
         case OP_PARAM:
@@ -528,7 +535,10 @@ int AsmParams(tabvar_t* tablevar, elem_s* node)
     }
     else if (node->parent->parent->type == NODE_OP &&
              node->parent->parent->value.op_v == OP_FUNC)
-    {// add check!
+    {
+        int param_locs[MAX_NUM_PARAMS] = {};
+
+        int curr_param = 0;
 
         while (node_op &&
                node_op->type == NODE_OP &&
@@ -540,7 +550,12 @@ int AsmParams(tabvar_t* tablevar, elem_s* node)
                 {
                     int ram_loc = AddVar(tablevar, node_op->left->value.str_v);
 
-                    WritePushPopAsm(CMD_POP, RAM_ARG, ram_loc, NO_REG);
+                    Assert(curr_param >= MAX_NUM_PARAMS);
+
+                    param_locs[curr_param] = ram_loc;
+
+                    curr_param++;
+                    //WritePushPopAsm(CMD_POP, RAM_ARG, ram_loc, NO_REG);
                 }
                 else
                 {
@@ -550,6 +565,11 @@ int AsmParams(tabvar_t* tablevar, elem_s* node)
                 }
             }
             node_op = node_op->right;
+        }
+
+        for(curr_param--; curr_param >= 0; curr_param--)
+        {
+            WritePushPopAsm(CMD_POP, RAM_ARG, param_locs[curr_param], NO_REG);
         }
     }
 }
@@ -629,7 +649,7 @@ int AddVar(tabvar_t* tablevar, const char* varname)
 {
     if (tablevar->Size >= tablevar->Capacity)
     {
-        ;//Recalloc
+        TableVarRecalloc(tablevar);
     }
 
     //if (SearchVar(tablevar, varname) != NOT_FOUND)      LogError(MULT_DEF_ERROR);
@@ -641,6 +661,24 @@ int AddVar(tabvar_t* tablevar, const char* varname)
     tablevar->Size++;
 
     return tablevar->Table[tablevar->Size - 1].memloc;
+}
+
+int TableVarRecalloc(tabvar_t* tablevar)
+{
+    var_t* temp_ptr = (var_t*) realloc(tablevar->Table, tablevar->Capacity * 2 * sizeof(var_t));
+
+    if (temp_ptr == NULL)
+    {
+        print_log(FRAMED, "RECALLOC ERROR: Can't find memory for table of variables");
+        return -1;
+    }
+    tablevar->Table      = temp_ptr;
+
+    tablevar->Capacity *= 2;
+
+    log("finish Tablevar Recalloc\n");
+
+    return 0;
 }
 
 int WriteCmdAsm(size_t cmd)
@@ -770,7 +808,7 @@ int AsmOutput(tabvar_t* tablevar, elem_s* node_out)
     {
         if (node_op->left)
         {
-            CountNode(tablevar, node_op->left);
+            RunOp(tablevar, node_op->left);
 
             WriteCmdAsm(CMD_OUT);
         }
