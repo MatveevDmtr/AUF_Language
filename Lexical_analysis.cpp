@@ -36,7 +36,7 @@
 
 //constants
 
-const char* FILECODE = "quadratka.txt";
+const char* FILECODE = "factorial_recursion.txt";
 
 
 //GLOBAL VARIABLES
@@ -273,7 +273,7 @@ int ReadOp(const char** ptr_line, const cmd_t* cmd_text, size_t cmd_code)
 {
     SkipSpaces(ptr_line);
 
-    if (strncmp(*ptr_line, cmd_text->Text, cmd_text->Len))        return -1;
+    if (strncmp(*ptr_line, cmd_text->Text, cmd_text->Len)) return -1;
 
     NewOp(cmd_code);
 
